@@ -8,6 +8,13 @@
 import Foundation
 
 public class SimpleEventBus {
+    public private(set) var name: String
+    static let shared = SimpleEventBus(name: "shared")
+
+    public init(name: String) {
+        self.name = name
+    }
+
     public typealias Subscription = UUID
     internal var subscribers: [Any] = []
 
@@ -20,16 +27,26 @@ public class SimpleEventBus {
     public func publish<Message: SimpleEventMessage>(event: SimpleEvent<Message>, message: Message) {
 
         self.eachSubscriber(event: event) { (subscriber) in
-            subscriber.handler(event, message)
+            subscriber.handler(message)
         }
     }
+
+    /// Publish an event with no message
+    /// - Parameter event: Event to publish
+    public func publish(event: SimpleEvent<NoSimpleEventMessage>) {
+        self.eachSubscriber(event: event) { (subscriber) in
+            subscriber.handler(NoSimpleEventMessage.message)
+        }
+    }
+
+
 
     /// Add a subscriber to a specific event type
     /// - Parameters:
     ///   - event: The event type to subscribe to.
     ///   - handler: A handler that is called for each event of this type that occurs
     @discardableResult
-    public func subscribe<Message: SimpleEventMessage>(event: SimpleEvent<Message>, handler: @escaping (SimpleEvent<Message>, Message)->Void) -> Subscription {
+    public func subscribe<Message: SimpleEventMessage>(_ event: SimpleEvent<Message>, handler: @escaping (Message)->Void) -> Subscription {
 
         let subscriber = Subscriber(event: event, handler: handler)
         subscribers.append(subscriber)

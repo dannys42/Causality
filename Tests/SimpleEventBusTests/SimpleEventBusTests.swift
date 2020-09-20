@@ -20,9 +20,9 @@ final class SimpleEventBusTests: XCTestCase {
         let expectedSubscriberCount = 0
 
         let expectation = XCTestExpectation()
-        let event = SimpleEventBus()
+        let event = SimpleEventBus(name: "\(#function)")
 
-        event.subscribe(event: stringEvent) { (_, message) in
+        event.subscribe(stringEvent) { message in
 
             resolvedValue = message.string
             subscriberCount += 1
@@ -44,10 +44,10 @@ final class SimpleEventBusTests: XCTestCase {
         let expectedSubscriberCount = 0
 
         let expectation = XCTestExpectation()
-        let event = SimpleEventBus()
+        let event = SimpleEventBus(name: "\(#function)")
 
         event.publish(event: stringEvent, message: Message1(string: inputValue))
-        event.subscribe(event: stringEvent) { (_, message) in
+        event.subscribe(stringEvent) { message in
 
             resolvedValue = message.string
             subscriberCount += 1

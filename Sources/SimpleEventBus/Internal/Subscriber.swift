@@ -13,5 +13,5 @@ protocol SubscriberId {
 internal struct Subscriber<Message: SimpleEventMessage>: SubscriberId {
     let id = UUID()
     let event: SimpleEvent<Message>
-    let handler: (SimpleEvent<Message>, Message)->Void
+    let handler: (Message)->Void
 }
