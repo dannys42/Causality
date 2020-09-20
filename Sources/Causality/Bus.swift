@@ -8,11 +8,13 @@
 import Foundation
 
 public extension Causality {
+
     /// A default/global bus
     static let bus = Bus(name: "global")
 
     /// A Bus for events to go from publishers to subscribers
     class Bus {
+        /// A name for the bus.
         public private(set) var name: String
 
         /// Initialize a Causality Event Bus
@@ -21,7 +23,9 @@ public extension Causality {
             self.name = name
         }
 
+        /// Subscription identifier used by subscribers to be able to unsubscribe.
         public typealias Subscription = UUID
+
         internal var subscribers: [Any] = []
 
         // MARK: Publish With Message

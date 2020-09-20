@@ -14,7 +14,7 @@ public extension Causality {
     /// ```
     /// This declares `SomeEvent` as an event that will require an `Int` on publish and will pass the same `Int` to the subscription handler.
     struct Event<Message: Causality.Message> {
-        /// `name` provides some context ont he purpose of the event.  It does not have to be unique.  However, events of the same "name" will not be called even if they have the same message type.
+        /// `name` provides some context on the purpose of the event.  It does not have to be unique.  However, events of the same "name" will not be called even if they have the same message type.
         public let name: String
     }
 }
