@@ -11,12 +11,6 @@ let stringEvent = SimpleEvent<Message1>(name: "Foo")
 let numberEvent = SimpleEvent<Message2>(name: "Foo")
 
 final class SimpleEventBusTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-//        XCTAssertEqual(SimpleEventBus().text, "Hello, World!")
-    }
 
     func testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish() {
         let inputValue = "Hello!"
@@ -67,9 +61,7 @@ final class SimpleEventBusTests: XCTestCase {
     }
 
 
-
     static var allTests = [
-        ("testExample", testExample),
         ( "testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish", testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish ),
         ( "testThat_SubscriberWillNotBeCalledOnce_IfDeclaredAfterPublish", testThat_SubscriberWillNotBeCalledOnce_IfDeclaredAfterPublish ),
     ]
