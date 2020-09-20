@@ -6,9 +6,10 @@
 //
 
 public extension Causality {
+    /// Custom types used as messages should conform to `Message`
     typealias Message = Any
 
-    /// A message that can be included for events that have no associated data
+    /// A convenience message that can be included for events that have no associated data
     struct NoMessage: Message {
         public init() {
         }

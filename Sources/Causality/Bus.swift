@@ -8,11 +8,15 @@
 import Foundation
 
 public extension Causality {
+    /// A default/global bus
     static let bus = Bus(name: "global")
 
+    /// A Bus for events to go from publishers to subscribers
     class Bus {
         public private(set) var name: String
 
+        /// Initialize a Causality Event Bus
+        /// - Parameter name: name to give the bus
         public init(name: String) {
             self.name = name
         }
@@ -29,6 +33,7 @@ public extension Causality {
         ///   - event: Event to publish
         ///   - message: Message to send in event
         public func publish<Message: Causality.Message>(event: Causality.Event<Message>, message: Message) {
+
             self.publish(event: event, message: message, workQueue: .none)
         }
 
