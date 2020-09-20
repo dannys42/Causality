@@ -1,26 +1,26 @@
 import XCTest
-@testable import SimpleEventBus
+@testable import Causality
 
-struct Message1: SimpleEventMessage {
+struct Message1: Causality.Message {
     let string: String
 }
-struct Message2: SimpleEventMessage {
+struct Message2: Causality.Message {
     let number: Int
 }
-let stringEvent = SimpleEvent<Message1>(name: "Foo")
-let numberEvent = SimpleEvent<Message2>(name: "Foo")
+let stringEvent = Causality.Event<Message1>(name: "Foo")
+let numberEvent = Causality.Event<Message2>(name: "Foo")
 
-final class SimpleEventBusTests: XCTestCase {
+final class CausalityTests: XCTestCase {
 
     func testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish() {
         let inputValue = "Hello!"
         let expectedValue = inputValue
         var resolvedValue: String?
         var subscriberCount = 0
-        let expectedSubscriberCount = 0
+        let expectedSubscriberCount = 1
 
         let expectation = XCTestExpectation()
-        let event = SimpleEventBus(name: "\(#function)")
+        let event = Causality.Bus(name: "\(#function)")
 
         event.subscribe(stringEvent) { message in
 
@@ -44,16 +44,16 @@ final class SimpleEventBusTests: XCTestCase {
         let expectedSubscriberCount = 0
 
         let expectation = XCTestExpectation()
-        let event = SimpleEventBus(name: "\(#function)")
+        let event = Causality.Bus(name: "\(#function)")
 
         event.publish(event: stringEvent, message: Message1(string: inputValue))
         event.subscribe(stringEvent) { message in
 
             resolvedValue = message.string
             subscriberCount += 1
-            expectation.fulfill()
         }
 
+        expectation.fulfill()
         self.wait(for: [expectation], timeout: 1.0)
 
         XCTAssertEqual(expectedValue, resolvedValue, "Expected value (\(expectedValue ?? "(nil)")) != Resolved value (\(resolvedValue ?? "(nil)"))")

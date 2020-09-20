@@ -10,8 +10,8 @@ import Foundation
 protocol SubscriberId {
     var id: UUID { get }
 }
-internal struct Subscriber<Message: SimpleEventMessage>: SubscriberId {
+internal struct Subscriber<Message: Causality.Message>: SubscriberId {
     let id = UUID()
-    let event: SimpleEvent<Message>
+    let event: Causality.Event<Message>
     let handler: (Message)->Void
 }

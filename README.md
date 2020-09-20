@@ -4,22 +4,22 @@
 <img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2">
 </p>
 
-# SimpleEventBus
+# Causality
 A very simple event bus for Swift.  Events may have associated data and are fully typed.
 
 ## Installation
 
 ### Swift Package Manager
-Add the `SimpleEventBus` package to the dependencies within your application's `Package.swift` file.  Substitute "x.y.z" with the latest `SimpleEventBus` [release](https://github.com/dannys42/SimpleEventBus/releases).
+Add the `Causality` package to the dependencies within your application's `Package.swift` file.  Substitute "x.y.z" with the latest `Causality` [release](https://github.com/dannys42/Causality/releases).
 
 ```swift
-.package(url: "https://github.com/dannys42/SimpleEventBus.git", from: "x.y.z")
+.package(url: "https://github.com/dannys42/Causality.git", from: "x.y.z")
 ```
 
-Add `SimpleEventBus` to your target's dependencies:
+Add `Causality` to your target's dependencies:
 
 ```swift
-.target(name: "example", dependencies: ["SimpleEventBus"]),
+.target(name: "example", dependencies: ["Causality"]),
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ This declares an event called `aTriggerEvent` that has no associated data.
 
 ```swift
 struct MyEvents {
-    static let aTriggerEvent = SimpleEvent<NoSimpleEventMessage>(name: "A Trigger")
+    static let aTriggerEvent = Causality.Event<NoSimpleEventMessage>(name: "A Trigger")
 }
 ```
 
@@ -43,7 +43,7 @@ struct MyEvents {
 To subscribe to this event:
 
 ```swift
-let subscription = SimpleEventBus.shared.subscribe(MyEvents.aTriggerEvent) { _ in
+let subscription = Causality.bus.subscribe(MyEvents.aTriggerEvent) { _ in
     print("Event happened")
 }
 
@@ -54,7 +54,7 @@ let subscription = SimpleEventBus.shared.subscribe(MyEvents.aTriggerEvent) { _ i
 To publish/post an event of this type:
 
 ```swift
-SimpleEventBus.shared.publish(MyEvents.aTriggerEvent)
+Causality.bus.publish(MyEvents.aTriggerEvent)
 ```
 
 ### An event with associated data
@@ -66,7 +66,7 @@ Events can include data of any type (referred to as a "message").  The event lab
 A message can be a standard Swift type like `Int`, `String`, etc.  Or it can be a `struct` or `class`.  In this example, we'll declare a struct:
 
 ```swift
-struct InterestingMessage {
+struct InterestingMessage: Causality.Message {
     let string: String
     let number: Int
 }
@@ -76,14 +76,14 @@ struct InterestingMessage {
 
 ```swift
 struct MyEvents {
-    static let interestingEvent = SimpleEvent<InterestingMessage>(name: "An interesting Event")
+    static let interestingEvent = Causality.Event<InterestingMessage>(name: "An interesting Event")
 }
 ```
 
 #### Subscribing to the event
 
 ```swift
-let subscription = SimpleEventBus.shared.subscribe(MyEvents.interestingEvent) { message in
+let subscription = Causality.bus.subscribe(MyEvents.interestingEvent) { message in
     print("A message from interestingEvent: \(message)")
 }
 ```
@@ -93,12 +93,12 @@ let subscription = SimpleEventBus.shared.subscribe(MyEvents.interestingEvent) { 
 To publish/post an event of this type:
 
 ```swift
-SimpleEventBus.shared.publish(MyEvents.interestingEvent, 
+Causality.bus.publish(MyEvents.interestingEvent, 
     message: InterestingMessage(string: "Hello", number: 42))
 ```
 
 #### To unsubsrcibe from an event
 
 ```swift
-SimpleEventBus.shared.unsubscribe(subscriptionId)
+Causality.bus.unsubscribe(subscriptionId)
 ```
