@@ -20,6 +20,8 @@ public extension Causality {
         public typealias Subscription = UUID
         internal var subscribers: [Any] = []
 
+        // MARK: Publish With Message
+
         /// Publish an event to the bus.
         ///
         /// All subscribers to this event will have their handler called along with the associated message.
@@ -27,34 +29,55 @@ public extension Causality {
         ///   - event: Event to publish
         ///   - message: Message to send in event
         public func publish<Message: Causality.Message>(event: Causality.Event<Message>, message: Message) {
-
-            self.eachSubscriber(event: event) { (subscriber) in
-                subscriber.handler(message)
-            }
+            self.publish(event: event, message: message, workQueue: .none)
         }
+
+
+        // MARK: Publish With No Message
 
         /// Publish an event with no message
         /// - Parameter event: Event to publish
         public func publish(event: Causality.Event<Causality.NoMessage>) {
-            self.eachSubscriber(event: event) { (subscriber) in
-                subscriber.handler(Causality.NoMessage.message)
-            }
+            let message = Causality.NoMessage.message
+            self.publish(event: event, message: message, workQueue: .none)
         }
 
-
+        // MARK: Subscribe
 
         /// Add a subscriber to a specific event type
         /// - Parameters:
         ///   - event: The event type to subscribe to.
-        ///   - handler: A handler that is called for each event of this type that occurs
+        ///   - handler: A handler that is called for each event of this type that occurs.  This handler will be called on the queue specified by the publisher (if given).  Otherwise there is no guarantee on what queue/thread the handler will be called on.
         @discardableResult
         public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, handler: @escaping (Message)->Void) -> Subscription {
 
-            let subscriber = Subscriber(event: event, handler: handler)
-            subscribers.append(subscriber)
-
-            return subscriber.id
+            return self.subscribe(event, workQueue: .none, handler: handler)
         }
+
+        /// Add a subscriber to a specific event type
+        /// - Parameters:
+        ///   - event: The event type to subscribe to.
+        ///   - queue: DispatchQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
+        ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
+        @discardableResult
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: DispatchQueue, handler: @escaping (Message)->Void) -> Subscription {
+
+            return self.subscribe(event, workQueue: .dispatch(queue), handler: handler)
+        }
+
+        /// Add a subscriber to a specific event type
+        /// - Parameters:
+        ///   - event: The event type to subscribe to.
+        ///   - queue: OperationQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
+        ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
+        @discardableResult
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: OperationQueue, handler: @escaping (Message)->Void) -> Subscription {
+
+            return self.subscribe(event, workQueue: .operation(queue), handler: handler)
+        }
+
+
+        // MARK: Unsubscribe
 
         /// Stop a particular subscription handler from listening to events anymore.
         /// - Parameters:
@@ -95,7 +118,39 @@ public extension Causality {
                 }
                 each(subscriber)
             }
-
         }
+
+        /// Add a subscriber to a specific event type
+        /// - Parameters:
+        ///   - event: The event type to subscribe to.
+        ///   - handler: A handler that is called for each event of this type that occurs
+        @discardableResult
+        private func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, workQueue: WorkQueue, handler: @escaping (Message)->Void) -> Subscription {
+
+            let subscriber = Subscriber(event: event, handler: handler, workQueue: workQueue)
+            subscribers.append(subscriber)
+
+            return subscriber.id
+        }
+
+        /// Publish an event to the bus.
+        ///
+        /// All subscribers to this event will have their handler called along with the associated message.
+        /// - Parameters:
+        ///   - event: Event to publish
+        ///   - message: Message to send in event
+        private func publish<Message: Causality.Message>(event: Causality.Event<Message>, message: Message, workQueue: WorkQueue) {
+
+            self.eachSubscriber(event: event) { (subscriber) in
+                var runQueue = subscriber.workQueue
+                if runQueue == .none {
+                    runQueue = workQueue
+                }
+                runQueue.execute {
+                    subscriber.handler(message)
+                }
+            }
+        }
+
     }
 }

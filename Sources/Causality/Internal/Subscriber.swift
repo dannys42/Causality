@@ -14,4 +14,5 @@ internal struct Subscriber<Message: Causality.Message>: SubscriberId {
     let id = UUID()
     let event: Causality.Event<Message>
     let handler: (Message)->Void
+    let workQueue: WorkQueue
 }
