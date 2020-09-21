@@ -1,7 +1,7 @@
 import XCTest
 
-import SimpleEventBusTests
+import CausalityTests
 
 var tests = [XCTestCaseEntry]()
-tests += SimpleEventBusTests.allTests()
+tests += CausalityTests.allTests()
 XCTMain(tests)
