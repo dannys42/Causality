@@ -9,8 +9,9 @@ import Foundation
 
 public extension Causality {
 
-    /// A default/global bus
+    /// The queue used by the default bus for thread-safety.  Also the default queue used for all buses (unless specified on initialization).
     static let globalQueue = DispatchQueue(label: "Causality.global", qos: .default, attributes: [], autoreleaseFrequency: .inherit, target: .global(qos: .default))
+    /// A default/global bus
     static let bus = Bus(name: "global", queue: globalQueue)
 
     /// A Bus for events to go from publishers to subscribers
