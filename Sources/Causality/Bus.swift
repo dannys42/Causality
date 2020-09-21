@@ -30,6 +30,7 @@ public extension Causality {
         }
 
         /// Subscription identifier used by subscribers to be able to unsubscribe.
+        /// Callers should make no assumptions about the underlying type of a `Subscription`.  (i.e. it may change to a struct, class, or protocol at some point)
         public typealias Subscription = UUID
 
         internal var subscribers: [Any] = []

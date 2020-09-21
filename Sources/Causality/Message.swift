@@ -11,9 +11,10 @@ public extension Causality {
 
     /// A convenience message that can be included for events that have no associated data
     struct NoMessage: Message {
-        public init() {
+
+        /// Users of the library are not expected to create these messages
+        private init() {
         }
-    
-        public static let message = NoMessage()
+        internal static let message = NoMessage()
     }
 }
