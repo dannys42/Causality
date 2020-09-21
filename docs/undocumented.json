@@ -1,0 +1,19 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/dannys/projects/Causality/Sources/Causality/Message.swift",
+      "line": 14,
+      "symbol": "Causality.NoMessage.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dannys/projects/Causality/Sources/Causality/Message.swift",
+      "line": 17,
+      "symbol": "Causality.NoMessage.message",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/dannys/projects/Causality"
+}

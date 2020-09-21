@@ -102,3 +102,10 @@ Causality.bus.publish(MyEvents.interestingEvent,
 ```swift
 Causality.bus.unsubscribe(subscriptionId)
 ```
+
+## API Documentation
+For more information visit our [API reference](https://dannys42.github.io/Causality/).
+
+
+## License
+This library is licensed under Apache 2.0. The full license text is available in [LICENSE](LICENSE.txt).
