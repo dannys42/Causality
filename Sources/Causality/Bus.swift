@@ -12,12 +12,13 @@ public extension Causality {
     /// A default/global bus
     static let globalQueue = DispatchQueue(label: "Causality.global", qos: .default, attributes: [], autoreleaseFrequency: .inherit, target: .global(qos: .default))
     static let bus = Bus(name: "global", queue: globalQueue)
-//    static let bus = Bus(name: "global", queue: DispatchQueue(label: "Causality.global", qos: .utility, attributes: [], autoreleaseFrequency: .inherit, target: .global(qos: .utility)))
 
     /// A Bus for events to go from publishers to subscribers
     class Bus {
         /// A name for the bus.
         public private(set) var name: String
+
+        /// Queue on which to execute publish/subscribe actions to ensure thread safety
         public private(set) var queue: DispatchQueue
 
         /// Initialize a Causality Event Bus
@@ -119,21 +120,6 @@ public extension Causality {
 
         // MARK: - Private Methods
 
-//        /// Call every subscriber that matches the event
-//        /// - Parameters:
-//        ///   - event: An event description
-//        ///   - each: handler called for every subscriber that matches the event
-//        private func eachSubscriber<Message: Causality.Message>(event: Causality.Event<Message>, _ each: (Subscriber<Message>)->Void) {
-//
-//            for subscriber in subscribers {
-//                guard let subscriber = subscriber as? Subscriber<Message>
-//                else {
-//                    continue
-//                }
-//                each(subscriber)
-//            }
-//        }
-//
         /// Add a subscriber to a specific event type
         /// - Parameters:
         ///   - event: The event type to subscribe to.
@@ -156,18 +142,18 @@ public extension Causality {
         ///   - event: Event to publish
         ///   - message: Message to send in event
         private func publish<Message: Causality.Message>(event: Causality.Event<Message>, message: Message, workQueue: WorkQueue) {
-            self.queue.async {
-                let subscribers = self.subscribers
-                subscribers.each(event: event) { (subscriber) in
-                    var runQueue = subscriber.workQueue
-                    if runQueue == .none {
-                        runQueue = workQueue
-                    }
-                    runQueue.execute {
-                        subscriber.handler(message)
-                    }
+            var subscribers: [Any] = []
+            self.queue.sync {
+                subscribers = self.subscribers
+            }
+            subscribers.each(event: event) { (subscriber) in
+                var runQueue = subscriber.workQueue
+                if runQueue == .none {
+                    runQueue = workQueue
                 }
-
+                runQueue.execute {
+                    subscriber.handler(message)
+                }
             }
         }
 
