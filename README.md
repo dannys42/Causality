@@ -107,6 +107,12 @@ Causality.bus.unsubscribe(subscriptionId)
 ## API Documentation
 For more information visit our [API reference](https://dannys42.github.io/Causality/).
 
-
+## Related Projects
+ - [OpenCombine](https://github.com/OpenCombine/OpenCombine)
+ - [EventBus](https://github.com/regexident/EventBus)
+ - [TopicEventBus](https://github.com/mcmatan/topicEventBus)
+ - [SwiftEventBus](https://github.com/cesarferreira/SwiftEventBus)
+ - [EmitterKit](https://github.com/aleclarson/emitter-kit)
+ 
 ## License
 This library is licensed under Apache 2.0. The full license text is available in [LICENSE](LICENSE.txt).
