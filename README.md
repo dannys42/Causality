@@ -1,12 +1,8 @@
 <p align="center">
 <a href="https://github.com/dannys42/Causality/actions?query=workflow%3ASwift"><img src="https://github.com/dannys42/Causality/workflows/Swift/badge.svg" alt="build status"></a>
-
 <img src="https://img.shields.io/badge/os-macOS-green.svg?style=flat" alt="macOS">
-
 <img src="https://img.shields.io/badge/os-iOS-green.svg?style=flat" alt="iOS">
-
 <img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
-
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2"></a>
 
 </p>
@@ -121,4 +117,4 @@ For more information visit our [API reference](https://dannys42.github.io/Causal
  - [EmitterKit](https://github.com/aleclarson/emitter-kit)
  
 ## License
-This library is licensed under Apache 2.0. The full license text is available in [LICENSE](LICENSE.txt).
+This library is licensed under Apache 2.0. The full license text is available in [LICENSE](LICENSE).
