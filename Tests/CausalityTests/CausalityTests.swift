@@ -60,9 +60,42 @@ final class CausalityTests: XCTestCase {
         XCTAssertEqual(subscriberCount, expectedSubscriberCount, "Expected subscriber to be called exactly \(expectedSubscriberCount) time.  Instead called \(subscriberCount) times")
     }
 
+    func testPerformanceOf_Signal() {
+        var didTimeout = false
+        self.measure {
+            let semaphore = DispatchSemaphore(value: 0)
+            semaphore.signal()
+            let result = semaphore.wait(timeout: .now()+1)
+            if result == .timedOut {
+                didTimeout = true
+            }
+        }
+        XCTAssertFalse(didTimeout, "Should not have timed out")
+    }
+
+    func testPerformanceOf_SingleEvent() {
+        let event = Causality.Bus(name: "\(#function)")
+        let semaphore = DispatchSemaphore(value: 0)
+        let triggerEvent = Causality.Event<Causality.NoMessage>(name: "Trigger")
+        var didTimeout = false
+
+        event.subscribe(triggerEvent) { _ in
+            semaphore.signal()
+        }
+        self.measure {
+            event.publish(event: triggerEvent)
+            let result = semaphore.wait(timeout: .now()+1)
+            if result == .timedOut {
+                didTimeout = true
+            }
+        }
+        XCTAssertFalse(didTimeout, "Should not have timed out")
+    }
 
     static var allTests = [
         ( "testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish", testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish ),
         ( "testThat_SubscriberWillNotBeCalledOnce_IfDeclaredAfterPublish", testThat_SubscriberWillNotBeCalledOnce_IfDeclaredAfterPublish ),
+        ( "testPerformanceOf_Signal", testPerformanceOf_Signal ),
+        ( "testPerformanceOf_SingleEvent", testPerformanceOf_SingleEvent ),
     ]
 }

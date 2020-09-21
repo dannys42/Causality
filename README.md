@@ -6,7 +6,7 @@
 </p>
 
 # Causality
-A very simple event bus for Swift.  Events may have associated data and are fully typed.
+A very simple event bus for Swift.  Events may have associated data and are fully typed.  All publish/subscribe methods are thread-safe.
 
 ## Installation
 

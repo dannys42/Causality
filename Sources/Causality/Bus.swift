@@ -10,17 +10,22 @@ import Foundation
 public extension Causality {
 
     /// A default/global bus
-    static let bus = Bus(name: "global")
+    static let globalQueue = DispatchQueue(label: "Causality.global", qos: .default, attributes: [], autoreleaseFrequency: .inherit, target: .global(qos: .default))
+    static let bus = Bus(name: "global", queue: globalQueue)
+//    static let bus = Bus(name: "global", queue: DispatchQueue(label: "Causality.global", qos: .utility, attributes: [], autoreleaseFrequency: .inherit, target: .global(qos: .utility)))
 
     /// A Bus for events to go from publishers to subscribers
     class Bus {
         /// A name for the bus.
         public private(set) var name: String
+        public private(set) var queue: DispatchQueue
 
         /// Initialize a Causality Event Bus
         /// - Parameter name: name to give the bus
-        public init(name: String) {
+        /// - Parameter queue: Queue for bookkeeping (e.g. to ensure publish/subscribe is thread safe)
+        public init(name: String, queue: DispatchQueue = globalQueue) {
             self.name = name
+            self.queue = queue
         }
 
         /// Subscription identifier used by subscribers to be able to unsubscribe.
@@ -92,43 +97,43 @@ public extension Causality {
         /// - Parameters:
         ///   - subsription: The Subscription that was returned from `subscribe()`
         public func unsubscribe(_ subscription: Subscription) {
-            var newSubscribers: [Any] = []
-
-            for subscriber in subscribers {
-                guard let subscriber = subscriber as? SubscriberId,
-                      subscriber.id == subscription
-                else {
-                    continue
-                }
-                newSubscribers.append(subscriber)
-            }
-            self.subscribers = newSubscribers
+            self.unsubscribe([subscription])
         }
+
         /// Unsubscribe an array of subscriptions
         /// - Parameter subscriptions: Subscriptions to unsubscribe from
         public func unsubscribe(_ subscriptions: [Subscription]) {
-            for subscription in subscriptions {
-                self.unsubscribe(subscription)
+            self.queue.async {
+                var newSubscribers: [Any] = []
+                for subscriber in self.subscribers {
+                    guard let subscriber = subscriber as? SubscriberId,
+                          subscriptions.contains(subscriber.id)
+                    else {
+                        continue
+                    }
+                    newSubscribers.append(subscriber)
+                }
+                self.subscribers = newSubscribers
             }
         }
 
         // MARK: - Private Methods
 
-        /// Call every subscriber that matches the event
-        /// - Parameters:
-        ///   - event: An event description
-        ///   - each: handler called for every subscriber that matches the event
-        private func eachSubscriber<Message: Causality.Message>(event: Causality.Event<Message>, _ each: (Subscriber<Message>)->Void) {
-
-            for subscriber in subscribers {
-                guard let subscriber = subscriber as? Subscriber<Message>
-                else {
-                    continue
-                }
-                each(subscriber)
-            }
-        }
-
+//        /// Call every subscriber that matches the event
+//        /// - Parameters:
+//        ///   - event: An event description
+//        ///   - each: handler called for every subscriber that matches the event
+//        private func eachSubscriber<Message: Causality.Message>(event: Causality.Event<Message>, _ each: (Subscriber<Message>)->Void) {
+//
+//            for subscriber in subscribers {
+//                guard let subscriber = subscriber as? Subscriber<Message>
+//                else {
+//                    continue
+//                }
+//                each(subscriber)
+//            }
+//        }
+//
         /// Add a subscriber to a specific event type
         /// - Parameters:
         ///   - event: The event type to subscribe to.
@@ -137,7 +142,9 @@ public extension Causality {
         private func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, workQueue: WorkQueue, handler: @escaping (Message)->Void) -> Subscription {
 
             let subscriber = Subscriber(event: event, handler: handler, workQueue: workQueue)
-            subscribers.append(subscriber)
+            self.queue.async {
+                self.subscribers.append(subscriber)
+            }
 
             return subscriber.id
         }
@@ -149,17 +156,42 @@ public extension Causality {
         ///   - event: Event to publish
         ///   - message: Message to send in event
         private func publish<Message: Causality.Message>(event: Causality.Event<Message>, message: Message, workQueue: WorkQueue) {
+            self.queue.async {
+                let subscribers = self.subscribers
+                subscribers.each(event: event) { (subscriber) in
+                    var runQueue = subscriber.workQueue
+                    if runQueue == .none {
+                        runQueue = workQueue
+                    }
+                    runQueue.execute {
+                        subscriber.handler(message)
+                    }
+                }
 
-            self.eachSubscriber(event: event) { (subscriber) in
-                var runQueue = subscriber.workQueue
-                if runQueue == .none {
-                    runQueue = workQueue
-                }
-                runQueue.execute {
-                    subscriber.handler(message)
-                }
             }
         }
 
     }
+}
+
+
+// MARK: - Array of Subscribers
+
+fileprivate extension Array where Element == Any {
+
+    /// Call every subscriber that matches the event
+    /// - Parameters:
+    ///   - event: An event description
+    ///   - each: handler called for every subscriber that matches the event
+    func each<Message: Causality.Message>(event: Causality.Event<Message>, _ each: (Subscriber<Message>)->Void) {
+
+        for subscriber in self {
+            guard let subscriber = subscriber as? Subscriber<Message>
+            else {
+                continue
+            }
+            each(subscriber)
+        }
+    }
+
 }
