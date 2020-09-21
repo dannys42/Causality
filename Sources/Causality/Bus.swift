@@ -142,6 +142,9 @@ public extension Causality {
         ///   - event: Event to publish
         ///   - message: Message to send in event
         private func publish<Message: Causality.Message>(event: Causality.Event<Message>, message: Message, workQueue: WorkQueue) {
+
+            // We have a choice of doing an async/each here instead, which might reduce the time of a publish() for the caller.  However, doing it this way results in slightly better timing between the publish() call and the subsequent subscription handler.  Since the handler will likely execute in another queue anyway, the preference here is to reduce the queue footprint.
+
             var subscribers: [Any] = []
             self.queue.sync {
                 subscribers = self.subscribers
