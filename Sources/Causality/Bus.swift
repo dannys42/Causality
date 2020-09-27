@@ -67,14 +67,14 @@ public extension Causality {
             self.publish(event: event, message: message, workQueue: .none)
         }
 
-        // MARK: Subscribe
+        // MARK: Subscribe w/ Subscription
 
         /// Add a subscriber to a specific event type
         /// - Parameters:
         ///   - event: The event type to subscribe to.
         ///   - handler: A handler that is called for each event of this type that occurs.  This handler will be called on the queue specified by the publisher (if given).  Otherwise there is no guarantee on what queue/thread the handler will be called on.
         @discardableResult
-        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, handler: @escaping (Message)->Void) -> Subscription {
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, handler: @escaping (Subscription, Message)->Void) -> Subscription {
 
             return self.subscribe(event, workQueue: .none, handler: handler)
         }
@@ -85,7 +85,7 @@ public extension Causality {
         ///   - queue: DispatchQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
         ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
         @discardableResult
-        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: DispatchQueue?=nil, handler: @escaping (Message)->Void) -> Subscription {
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: DispatchQueue?=nil, handler: @escaping (Subscription, Message)->Void) -> Subscription {
             let workQueue = WorkQueue(queue)
             return self.subscribe(event, workQueue: workQueue, handler: handler)
         }
@@ -96,9 +96,49 @@ public extension Causality {
         ///   - queue: OperationQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
         ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
         @discardableResult
-        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: OperationQueue, handler: @escaping (Message)->Void) -> Subscription {
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: OperationQueue, handler: @escaping (Subscription, Message)->Void) -> Subscription {
 
             return self.subscribe(event, workQueue: .operation(queue), handler: handler)
+        }
+
+        // MARK: Subscribe w/o Subscription
+
+        /// Add a subscriber to a specific event type
+        /// - Parameters:
+        ///   - event: The event type to subscribe to.
+        ///   - handler: A handler that is called for each event of this type that occurs.  This handler will be called on the queue specified by the publisher (if given).  Otherwise there is no guarantee on what queue/thread the handler will be called on.
+        @discardableResult
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, handler: @escaping (Message)->Void) -> Subscription {
+
+            return self.subscribe(event, workQueue: .none) { _, message in
+                handler(message)
+            }
+        }
+
+        /// Add a subscriber to a specific event type
+        /// - Parameters:
+        ///   - event: The event type to subscribe to.
+        ///   - queue: DispatchQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
+        ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
+        @discardableResult
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: DispatchQueue?=nil, handler: @escaping (Message)->Void) -> Subscription {
+            let workQueue = WorkQueue(queue)
+            return self.subscribe(event, workQueue: workQueue) { _, message in
+                handler(message)
+            }
+        }
+
+        /// Add a subscriber to a specific event type
+        /// - Parameters:
+        ///   - event: The event type to subscribe to.
+        ///   - queue: OperationQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
+        ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
+        @discardableResult
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: OperationQueue, handler: @escaping (Message)->Void) -> Subscription {
+
+            return self.subscribe(event, workQueue: .operation(queue)) { _, message in
+                handler(message)
+            }
         }
 
 
@@ -129,7 +169,7 @@ public extension Causality {
         /// - Parameters:
         ///   - event: The event type to subscribe to.
         ///   - handler: A handler that is called for each event of this type that occurs
-        private func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, workQueue: WorkQueue, handler: @escaping (Message)->Void) -> Subscription {
+        private func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, workQueue: WorkQueue, handler: @escaping (Subscription, Message)->Void) -> Subscription {
 
             let subscriber = Subscriber(bus: self, event: event, handler: handler, workQueue: workQueue)
             self.queue.async {
@@ -147,12 +187,13 @@ public extension Causality {
         ///   - message: Message to send in event
         private func publish<Message: Causality.Message>(event: Causality.Event<Message>, message: Message, workQueue: WorkQueue) {
 
-            // We have a choice of doing an async/each here instead, which might reduce the time of a publish() for the caller.  However, doing it this way results in slightly better timing between the publish() call and the subsequent subscription handler.  Since the handler will likely execute in another queue anyway, the preference here is to reduce the queue footprint.
-
             self.queue.sync {
                 let subscribers = self.subscribers
                 for (_, someSubscriber) in subscribers {
                     guard let subscriber = someSubscriber as? Subscriber<Message> else {
+                        continue
+                    }
+                    guard subscriber.state != .terminate else {
                         continue
                     }
                     var runQueue = subscriber.workQueue
@@ -160,7 +201,7 @@ public extension Causality {
                         runQueue = workQueue
                     }
                     runQueue.execute {
-                        subscriber.handler(message)
+                        subscriber.handler(subscriber, message)
                     }
                 }
             }

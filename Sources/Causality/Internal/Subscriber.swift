@@ -18,7 +18,7 @@ public protocol AnySubscriber: SubscriberId, AnyObject {
 
 
 internal class Subscriber<Message: Causality.Message>: AnySubscriber {
-    typealias SubscriptionHandler = (Message)->Void
+    typealias SubscriptionHandler = (AnySubscriber, Message)->Void
 
     let id: Causality.SubscriptionId
     let bus: Causality.Bus

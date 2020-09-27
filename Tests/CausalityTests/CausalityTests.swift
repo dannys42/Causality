@@ -36,7 +36,7 @@ final class CausalityTests: XCTestCase {
         XCTAssertEqual(subscriberCount, expectedSubscriberCount, "Expected subscriber to be called exactly \(expectedSubscriberCount) time.  Instead called \(subscriberCount) times")
     }
 
-    func testThat_SubscriberWillNotBeCalledOnce_IfDeclaredAfterPublish() {
+    func testThat_SubscriberWillNotBeCalled_IfDeclaredAfterPublish() {
         let inputValue = "Hello!"
         let expectedValue: String? = nil
         var resolvedValue: String?
@@ -58,6 +58,23 @@ final class CausalityTests: XCTestCase {
 
         XCTAssertEqual(expectedValue, resolvedValue, "Expected value (\(expectedValue ?? "(nil)")) != Resolved value (\(resolvedValue ?? "(nil)"))")
         XCTAssertEqual(subscriberCount, expectedSubscriberCount, "Expected subscriber to be called exactly \(expectedSubscriberCount) time.  Instead called \(subscriberCount) times")
+    }
+
+    func testThat_SubscriberCanUnsubscribe_InHandler() {
+        let inputValue = "Hello!"
+        let event = Causality.Bus(name: "\(#function)")
+        var subscriberCount = 0
+        let expectedSubscriberCount = 0
+
+        event.subscribe(stringEvent) { subscriber, message in
+            subscriberCount += 1
+            subscriber.terminate()
+        }
+
+        event.publish(event: stringEvent, message: Message1(string: inputValue))
+        event.publish(event: stringEvent, message: Message1(string: inputValue))
+
+        XCTAssertEqual(subscriberCount, 1, "Expected subscriberCount: \(expectedSubscriberCount). Got \(subscriberCount)")
     }
 
     func testPerformanceOf_Signal() {
@@ -94,7 +111,8 @@ final class CausalityTests: XCTestCase {
 
     static var allTests = [
         ( "testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish", testThat_SubscriberWillBeCalledOnce_IfDeclaredBeforePublish ),
-        ( "testThat_SubscriberWillNotBeCalledOnce_IfDeclaredAfterPublish", testThat_SubscriberWillNotBeCalledOnce_IfDeclaredAfterPublish ),
+        ( "testThat_SubscriberWillNotBeCalled_IfDeclaredAfterPublish", testThat_SubscriberWillNotBeCalled_IfDeclaredAfterPublish ),
+        ( "testThat_SubscriberCanUnsubscribe_InHandler", testThat_SubscriberCanUnsubscribe_InHandler ),
         ( "testPerformanceOf_Signal", testPerformanceOf_Signal ),
         ( "testPerformanceOf_SingleEvent", testPerformanceOf_SingleEvent ),
     ]
