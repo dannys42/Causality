@@ -7,12 +7,36 @@
 
 import Foundation
 
-protocol SubscriberId {
-    var id: UUID { get }
+public protocol SubscriberId {
+    var id: Causality.SubscriptionId { get }
 }
-internal struct Subscriber<Message: Causality.Message>: SubscriberId {
-    let id = UUID()
+
+public protocol AnySubscriber: SubscriberId, AnyObject {
+    var state: Causality.SubscriptionState { get }
+    func terminate()
+}
+
+
+internal class Subscriber<Message: Causality.Message>: AnySubscriber {
+    typealias SubscriptionHandler = (Message)->Void
+
+    let id: Causality.SubscriptionId
+    let bus: Causality.Bus
     let event: Causality.Event<Message>
-    let handler: (Message)->Void
+    let handler: SubscriptionHandler
     let workQueue: WorkQueue
+    var state: Causality.SubscriptionState
+
+    init(bus: Causality.Bus, event: Causality.Event<Message>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
+        self.id = UUID()
+        self.bus = bus
+        self.event = event
+        self.handler = handler
+        self.workQueue = workQueue
+        self.state = .continue
+    }
+
+    public func terminate() {
+        self.bus.unsubscribe(self)
+    }
 }

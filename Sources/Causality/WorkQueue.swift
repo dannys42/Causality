@@ -11,6 +11,24 @@ internal enum WorkQueue {
     case none
     case dispatch(DispatchQueue)
     case operation(OperationQueue)
+
+    init() {
+        self = .none
+    }
+    init(_ queue: DispatchQueue?) {
+        if let queue = queue {
+            self = .dispatch(queue)
+        } else {
+            self = .none
+        }
+    }
+    init(_ queue: OperationQueue?) {
+        if let queue = queue {
+            self = .operation(queue)
+        } else {
+            self = .none
+        }
+    }
 }
 
 extension WorkQueue {

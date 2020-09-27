@@ -14,6 +14,18 @@ public extension Causality {
     /// A default/global bus
     static let bus = Bus(name: "global", queue: globalQueue)
 
+    typealias Subscription = AnySubscriber
+
+    enum SubscriptionState {
+        case `continue`
+        case terminate
+    }
+
+    /// Subscription identifier used by subscribers to be able to unsubscribe.
+    /// Callers should make no assumptions about the underlying type of a `Subscription`.  (i.e. it may change to a struct, class, or protocol at some point)
+    typealias SubscriptionId = UUID
+    
+
     /// A Bus for events to go from publishers to subscribers
     class Bus {
         /// A name for the bus.
@@ -30,11 +42,7 @@ public extension Causality {
             self.queue = queue
         }
 
-        /// Subscription identifier used by subscribers to be able to unsubscribe.
-        /// Callers should make no assumptions about the underlying type of a `Subscription`.  (i.e. it may change to a struct, class, or protocol at some point)
-        public typealias Subscription = UUID
-
-        internal var subscribers: [Any] = []
+        internal var subscribers: [SubscriptionId:AnySubscriber] = [:]
 
         // MARK: Publish With Message
 
@@ -77,9 +85,9 @@ public extension Causality {
         ///   - queue: DispatchQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
         ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
         @discardableResult
-        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: DispatchQueue, handler: @escaping (Message)->Void) -> Subscription {
-
-            return self.subscribe(event, workQueue: .dispatch(queue), handler: handler)
+        public func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, queue: DispatchQueue?=nil, handler: @escaping (Message)->Void) -> Subscription {
+            let workQueue = WorkQueue(queue)
+            return self.subscribe(event, workQueue: workQueue, handler: handler)
         }
 
         /// Add a subscriber to a specific event type
@@ -107,14 +115,9 @@ public extension Causality {
         /// - Parameter subscriptions: Subscriptions to unsubscribe from
         public func unsubscribe(_ subscriptions: [Subscription]) {
             self.queue.async {
-                var newSubscribers: [Any] = []
-                for subscriber in self.subscribers {
-                    guard let subscriber = subscriber as? SubscriberId,
-                          subscriptions.contains(subscriber.id)
-                    else {
-                        continue
-                    }
-                    newSubscribers.append(subscriber)
+                var newSubscribers = self.subscribers
+                for subscription in subscriptions {
+                    newSubscribers.removeValue(forKey: subscription.id)
                 }
                 self.subscribers = newSubscribers
             }
@@ -126,15 +129,14 @@ public extension Causality {
         /// - Parameters:
         ///   - event: The event type to subscribe to.
         ///   - handler: A handler that is called for each event of this type that occurs
-        @discardableResult
         private func subscribe<Message: Causality.Message>(_ event: Causality.Event<Message>, workQueue: WorkQueue, handler: @escaping (Message)->Void) -> Subscription {
 
-            let subscriber = Subscriber(event: event, handler: handler, workQueue: workQueue)
+            let subscriber = Subscriber(bus: self, event: event, handler: handler, workQueue: workQueue)
             self.queue.async {
-                self.subscribers.append(subscriber)
+                self.subscribers[subscriber.id] = subscriber
             }
 
-            return subscriber.id
+            return subscriber
         }
 
         /// Publish an event to the bus.
@@ -147,42 +149,22 @@ public extension Causality {
 
             // We have a choice of doing an async/each here instead, which might reduce the time of a publish() for the caller.  However, doing it this way results in slightly better timing between the publish() call and the subsequent subscription handler.  Since the handler will likely execute in another queue anyway, the preference here is to reduce the queue footprint.
 
-            var subscribers: [Any] = []
             self.queue.sync {
-                subscribers = self.subscribers
-            }
-            subscribers.each(event: event) { (subscriber) in
-                var runQueue = subscriber.workQueue
-                if runQueue == .none {
-                    runQueue = workQueue
-                }
-                runQueue.execute {
-                    subscriber.handler(message)
+                let subscribers = self.subscribers
+                for (_, someSubscriber) in subscribers {
+                    guard let subscriber = someSubscriber as? Subscriber<Message> else {
+                        continue
+                    }
+                    var runQueue = subscriber.workQueue
+                    if runQueue == .none {
+                        runQueue = workQueue
+                    }
+                    runQueue.execute {
+                        subscriber.handler(message)
+                    }
                 }
             }
         }
 
     }
-}
-
-
-// MARK: - Array of Subscribers
-
-fileprivate extension Array where Element == Any {
-
-    /// Call every subscriber that matches the event
-    /// - Parameters:
-    ///   - event: An event description
-    ///   - each: handler called for every subscriber that matches the event
-    func each<Message: Causality.Message>(event: Causality.Event<Message>, _ each: (Subscriber<Message>)->Void) {
-
-        for subscriber in self {
-            guard let subscriber = subscriber as? Subscriber<Message>
-            else {
-                continue
-            }
-            each(subscriber)
-        }
-    }
-
 }
