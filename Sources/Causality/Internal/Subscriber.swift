@@ -13,7 +13,7 @@ public protocol SubscriberId {
 
 public protocol AnySubscriber: SubscriberId, AnyObject {
     var state: Causality.SubscriptionState { get }
-    func terminate()
+    func unsubscribe()
 }
 
 
@@ -36,7 +36,7 @@ internal class Subscriber<Message: Causality.Message>: AnySubscriber {
         self.state = .continue
     }
 
-    public func terminate() {
+    public func unsubscribe() {
         self.bus.unsubscribe(self)
     }
 }

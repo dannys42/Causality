@@ -18,7 +18,7 @@ public extension Causality {
 
     enum SubscriptionState {
         case `continue`
-        case terminate
+        case unsubscribePending
     }
 
     /// Subscription identifier used by subscribers to be able to unsubscribe.
@@ -193,7 +193,7 @@ public extension Causality {
                     guard let subscriber = someSubscriber as? Subscriber<Message> else {
                         continue
                     }
-                    guard subscriber.state != .terminate else {
+                    guard subscriber.state != .unsubscribePending else {
                         continue
                     }
                     var runQueue = subscriber.workQueue

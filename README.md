@@ -77,34 +77,71 @@ struct InterestingMessage: Causality.Message {
 
 #### Declare the event
 
+Declaring an event with a message:
+
+```swift
+let someEvent = Causality.Event<SomeMessage>(name: "Some Event")
+```
+
+Or categorize your events:
+
 ```swift
 struct MyEvents {
-    static let interestingEvent = Causality.Event<InterestingMessage>(name: "An interesting Event")
+    static let interestingEvent1 = Causality.Event<InterestingMessage>(name: "An interesting Event 1")
+    static let interestingEvent2 = Causality.Event<InterestingMessage>(name: "An interesting Event 2")
 }
 ```
 
-#### Subscribing to the event
+#### Subscribing and Unsubscribing to the events
+
+Save your subscriptions to unsubscribe later:
 
 ```swift
 let subscription = Causality.bus.subscribe(MyEvents.interestingEvent) { message in
     print("A message from interestingEvent: \(message)")
 }
+
+Casaulity.bus.unsubscribe(subscription)
 ```
+
+Or unsubscribe from within a subscription handler:
+
+```swift
+Causality.bus.subscribe(MyEvents.interestingEvent) { subscription, message in
+    print("A message from interestingEvent: \(message)")
+    
+    subscription.unsubscribe()
+}
+```
+
 
 #### Publish events
 
 To publish/post an event of this type:
 
 ```swift
-Causality.bus.publish(MyEvents.interestingEvent, 
+Causality.bus.publish(MyEvents.interestingEvent1, 
     message: InterestingMessage(string: "Hello", number: 42))
 ```
 
-#### To unsubsrcibe from an event
+Create aliases for your bus:
 
 ```swift
-Causality.bus.unsubscribe(subscriptionId)
+let eventBus = Causality.bus
+
+eventBus.publish(MyEvents.interestingEvent1, 
+    message: InterestingMessage(string: "Hello", number: 42))
 ```
+
+Or create local buses to isolate your events:
+
+```swift
+let newEventBus = Causality.Bus(name: "My local bus")
+
+newEventBus.publish(MyEvents.interestingEvent1, 
+    message: InterestingMessage(string: "Hello", number: 42))
+```
+
 
 ## API Documentation
 For more information visit our [API reference](https://dannys42.github.io/Causality/).

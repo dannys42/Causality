@@ -68,7 +68,7 @@ final class CausalityTests: XCTestCase {
 
         event.subscribe(stringEvent) { subscriber, message in
             subscriberCount += 1
-            subscriber.terminate()
+            subscriber.unsubscribe()
         }
 
         event.publish(event: stringEvent, message: Message1(string: inputValue))
