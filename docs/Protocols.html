@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Structures  Reference</title>
+    <title>Protocols  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Section/Protocols" class="dashAnchor"></a>
 
-    <a title="Structures  Reference"></a>
+    <a title="Protocols  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html"> Reference</a>
       <img class="carat" src="img/carat.png" />
-      Structures  Reference
+      Protocols  Reference
     </p>
 
     <div class="content-wrapper">
@@ -87,8 +87,8 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>Structures</h1>
-            <p>The following structures are available globally.</p>
+            <h1>Protocols</h1>
+            <p>The following protocols are available globally.</p>
 
           </div>
         </section>
@@ -100,9 +100,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV"></a>
-                    <a name="//apple_ref/swift/Struct/Causality" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV">Causality</a>
+                    <a name="/s:9Causality0A15AnySubscriptionP"></a>
+                    <a name="//apple_ref/swift/Protocol/CausalityAnySubscription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Causality0A15AnySubscriptionP">CausalityAnySubscription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -110,15 +110,69 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Causality is a very simple event bus for Swift.  Events may have associated data and are fully typed.  Causality also allows for monitoring State changes.</p>
+                        <p>All Subscriptions conform to this protocol</p>
 
-                        <a href="Structs/Causality.html" class="slightly-smaller">See more</a>
+                        <a href="Protocols/CausalityAnySubscription.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Causality</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityAnySubscription</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9Causality0A17EventSubscriptionP"></a>
+                    <a name="//apple_ref/swift/Protocol/CausalityEventSubscription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Causality0A17EventSubscriptionP">CausalityEventSubscription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An event subscription.  Used to unsubscribe.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityEventSubscription</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9Causality0A17StateSubscriptionP"></a>
+                    <a name="//apple_ref/swift/Protocol/CausalityStateSubscription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Causality0A17StateSubscriptionP">CausalityStateSubscription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A state change subscription.  Used to unsubscribe.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityStateSubscription</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a></span></code></pre>
 
                         </div>
                       </div>

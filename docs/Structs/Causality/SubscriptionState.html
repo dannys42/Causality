@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Event Structure Reference</title>
+    <title>SubscriptionState Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Struct/Event" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/SubscriptionState" class="dashAnchor"></a>
 
-    <a title="Event Structure Reference"></a>
+    <a title="SubscriptionState Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../../index.html"> Reference</a>
       <img class="carat" src="../../img/carat.png" />
-      Event Structure Reference
+      SubscriptionState Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -87,21 +87,15 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>Event</h1>
+            <h1>SubscriptionState</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Event</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">CausalityAnyEvent</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">SubscriptionState</span></code></pre>
 
                 </div>
               </div>
-            <p>Declare events to be used as endpoints for publish or subscribe calls.</p>
-
-<p>Example:</p>
-<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">SomeEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Some Event"</span><span class="p">)</span>
-</code></pre>
-
-<p>This declares <code>SomeEvent</code> as an event that will require an <code>Int</code> on publish and will pass the same <code>Int</code> to the subscription handler.</p>
+            <p>Subscriptions can be in the following states:</p>
 
           </div>
         </section>
@@ -113,9 +107,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV5EventV4nameSSvp"></a>
-                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV5EventV4nameSSvp">name</a>
+                    <a name="/s:9CausalityAAV17SubscriptionStateO6activeyA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/active" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV17SubscriptionStateO6activeyA2DmF">active</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -123,14 +117,41 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p><code>name</code> provides some context on the purpose of the event.  It does not have to be unique.  However, events of the same &ldquo;name&rdquo; will not be called even if they have the same message type.</p>
+                        <p>handler will be called when appropriate</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">active</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9CausalityAAV17SubscriptionStateO18unsubscribePendingyA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/unsubscribePending" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV17SubscriptionStateO18unsubscribePendingyA2DmF">unsubscribePending</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>handler will no longer be called.  The subscription will be removed at the next opportunity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unsubscribePending</span></code></pre>
 
                         </div>
                       </div>
