@@ -28,7 +28,7 @@ internal class EventSubscriber<Message: Causality.Message>: CausalityEventSubscr
         self.event = event
         self.handler = handler
         self.workQueue = workQueue
-        self.subscriptionState = .continue
+        self.subscriptionState = .active
     }
 
     public func unsubscribe() {

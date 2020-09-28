@@ -8,7 +8,10 @@
 import Foundation
 
 public extension Causality {
+    /// Subscription info for events.  Used to `unsubscribe()`.
     typealias EventSubscription = CausalityEventSubscription
+
+    /// Underlying type for EventIds (do not rely on this always being a UUID)
     typealias EventId = UUID
 
     /// Declare events to be used as endpoints for publish or subscribe calls.

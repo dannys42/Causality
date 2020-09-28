@@ -14,8 +14,11 @@ public extension Causality {
     /// A default/global bus
     static let bus = Bus(name: "global", queue: globalQueue)
 
+    /// Subscriptions can be in the following states:
+    ///  - active: handler will be called when appropriate
+    ///  - unsubscribePending: handler will no longer be called.  The subscription will be removed at the next opportunity.
     enum SubscriptionState {
-        case `continue`
+        case active
         case unsubscribePending
     }
 

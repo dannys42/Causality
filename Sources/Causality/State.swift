@@ -13,14 +13,25 @@ protocol CausalityAnyState: Hashable {
 }
 
 public extension Causality {
+    /// Type-erased StateValue
     typealias AnyStateValue = Any
+
+    /// Underlying type for StateIds (do not rely on this always being a UUID)
     typealias StateId = UUID
 
     /// Custom type for `State` info
     typealias StateValue = AnyStateValue & Equatable
 
+    /// Subscription info for states.  Used to `unsubscribe()`.
     typealias StateSubscription = CausalityStateSubscription
 
+    /// Declare states with typed values as labels to be used for `setState()` and `subscribe()` calls.
+    ///
+    /// Example:
+    /// ```
+    /// static let SomeState = Causality.State<Int>(name: "Some State")
+    /// ```
+    /// This declares `SomeState` as an state that will pass an `Int` to subscribers whenever the value changes.
     struct State<State: Causality.StateValue>: CausalityAnyState {
         /// `name` provides some context on the purpose of the event.  It does not have to be unique.  However, events of the same "name" will not be called even if they have the same message type.
         public let name: String
