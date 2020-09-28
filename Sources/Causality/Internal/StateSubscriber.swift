@@ -7,27 +7,28 @@
 
 import Foundation
 
-public protocol AnyStateSubscriber: AnySubscriber {
+/// A state change subscription.  Used to unsubscribe.
+public protocol CausalityStateSubscription: CausalityAnySubscription {
 
 }
 
-internal class StateSubscriber<State: Causality.StateValue>: AnyStateSubscriber {
-    typealias SubscriptionHandler = (AnyStateSubscriber, State)->Void
+internal class StateSubscriber<State: Causality.StateValue>: CausalityStateSubscription {
+    typealias SubscriptionHandler = (CausalityStateSubscription, State)->Void
 
     let id: Causality.SubscriptionId
     let bus: Causality.Bus
-    let event: Causality.State<State>
+    let state: Causality.State<State>
     let handler: SubscriptionHandler
     let workQueue: WorkQueue
-    var state: Causality.SubscriptionState
+    var subscriptionState: Causality.SubscriptionState
 
-    init(bus: Causality.Bus, event: Causality.State<State>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
+    init(bus: Causality.Bus, state: Causality.State<State>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
         self.id = UUID()
         self.bus = bus
-        self.event = event
+        self.state = state
         self.handler = handler
         self.workQueue = workQueue
-        self.state = .continue
+        self.subscriptionState = .continue
     }
 
     public func unsubscribe() {

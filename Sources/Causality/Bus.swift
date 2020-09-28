@@ -42,11 +42,11 @@ public extension Causality {
 
         // MARK: Event
 
-        internal var eventSubscribers: [SubscriptionId:AnyEventSubscriber] = [:]
+        internal var eventSubscribers: [SubscriptionId:CausalityEventSubscription] = [:]
 
         // MARK: State
 
-        internal var stateSubscribers: [SubscriptionId:AnyStateSubscriber] = [:]
+        internal var stateSubscribers: [SubscriptionId:CausalityStateSubscription] = [:]
         internal var state: [AnyState:Causality.AnyStateValue] = [:]
 
     }

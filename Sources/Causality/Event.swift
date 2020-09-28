@@ -8,7 +8,7 @@
 import Foundation
 
 public extension Causality {
-    typealias EventSubscription = AnyEventSubscriber
+    typealias EventSubscription = CausalityEventSubscription
     typealias EventId = UUID
 
     /// Declare events to be used as endpoints for publish or subscribe calls.
@@ -132,7 +132,6 @@ extension Causality.Bus {
         }
     }
 
-
     // MARK: - Private Event Methods
 
     /// Add a subscriber to a specific event type
@@ -166,7 +165,7 @@ extension Causality.Bus {
                 guard let subscriber = someSubscriber as? EventSubscriber<Message> else {
                     continue
                 }
-                guard subscriber.state != .unsubscribePending else {
+                guard subscriber.subscriptionState != .unsubscribePending else {
                     continue
                 }
                 let runQueue = subscriber.workQueue.withDefault(workQueue)

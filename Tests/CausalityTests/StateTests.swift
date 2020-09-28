@@ -23,8 +23,8 @@ final class StateTests: XCTestCase {
     func testThat_InitialState_DoesNotExist() {
         let bus = Causality.Bus(name: "\(#function)")
 
-        let hasState = bus.hasState(event: InterestingString)
-        let state = bus.getState(event: InterestingString)
+        let hasState = bus.hasState(InterestingString)
+        let state = bus.getState(InterestingString)
 
         XCTAssertFalse(hasState, "Expect hasState == false on initialization")
         XCTAssertNil(state, "Expect getState == nil on initialization ")
@@ -38,8 +38,8 @@ final class StateTests: XCTestCase {
 
         bus.set(state: InterestingString, value: inputValue)
 
-        let hasState = bus.hasState(event: InterestingString)
-        resolvedValue = bus.getState(event: InterestingString)
+        let hasState = bus.hasState(InterestingString)
+        resolvedValue = bus.getState(InterestingString)
 
         XCTAssertTrue(hasState, "Expect hasState == true on initialization")
         XCTAssertEqual(resolvedValue, expectedValue, "Expect getState == \(expectedValue)")
