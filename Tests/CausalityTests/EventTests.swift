@@ -77,16 +77,6 @@ final class CausalityTests: XCTestCase {
         XCTAssertEqual(subscriberCount, 1, "Expected subscriberCount: \(expectedSubscriberCount). Got \(subscriberCount)")
     }
 
-//    func testThat_CanSubscribeToAnyMessage() {
-//        let anyEvent = Causality.Event<Any>
-//
-//        let event = Causality.Bus(name: "\(#function)")
-//        event.subscribe(anyEvent) { _ in
-//
-//        }
-//
-//    }
-
     func testPerformanceOf_Signal() {
         var didTimeout = false
         self.measure {

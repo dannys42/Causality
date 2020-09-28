@@ -8,7 +8,12 @@
 </p>
 
 # Causality
-A very simple event bus for Swift.  Events may have associated data and are fully typed.  All publish/subscribe methods are thread-safe.
+`Causality` is simple in-memory event bus for Swift.  Events may have associated data and are fully typed.  All publish/subscribe methods are thread-safe.
+
+In addition, `Causality` has provisions for monitoring State information.  State differs from Events in that:
+
+ - State handlers will be called immediately with the last known good value (if one is available)
+ - State handlers will not be called if the state value is identical to the previous value
 
 ## Installation
 
@@ -27,6 +32,7 @@ Add `Causality` to your target's dependencies:
 
 ## Usage
 
+## Events
 
 ### Just an event (no data)
 The simplest event to manage has no associated data.
@@ -140,6 +146,72 @@ let newEventBus = Causality.Bus(name: "My local bus")
 
 newEventBus.publish(MyEvents.interestingEvent1, 
     message: InterestingMessage(string: "Hello", number: 42))
+```
+
+
+
+## State
+
+#### Define the State Value
+
+Similar to Events, States have defined values.  However `StateValue`s must be Equatable. 
+
+
+```swift
+struct PlayerValue: Causality.StateValue {
+    let numberOfLives: Int
+    let health: Int
+    let armor: Int
+}
+```
+
+#### Declare the state
+
+Declaring a state with the associated value:
+
+```swift
+let playerState = Causality.State<PlayerValue>(name: "Player State")
+```
+
+Or categorize your events:
+
+```swift
+struct GameStates {
+    static let playerState1 = Causality.State<PlayerValue>(name: "Player 1 State")
+    static let playerState2 = Causality.State<PlayerValue>(name: "Player 2 State")
+}
+```
+
+#### Subscribing and Unsubscribing to State changes
+
+Save your subscriptions to unsubscribe later:
+
+```swift
+let subscription = Causality.bus.subscribe(GameStates.playerState1) { state in
+    print("Player 1 state changed to: \(state)")
+}
+
+Casaulity.bus.unsubscribe(subscription)
+```
+
+Or unsubscribe from within a subscription handler:
+
+```swift
+Causality.bus.subscribe(GameStates.playerState1) { subscription, message in
+    print("Player 1 state changed to: \(state)")
+    
+    subscription.unsubscribe()
+}
+```
+
+If the state was previously set, the subscription handler will be called immediately with the last known value.  The subscription handler will only be called if subsequent `.set()` calls have differing values.
+
+
+#### Setting State
+
+```swift
+Causality.bus.set(GameStates.playerState1, 
+    value: PlayerValue(numberOfLives: 3, health: 75, armor: 10))
 ```
 
 

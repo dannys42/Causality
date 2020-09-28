@@ -9,14 +9,14 @@ import Foundation
 import XCTest
 @testable import Causality
 
-fileprivate struct StringState: Causality.State {
+fileprivate struct StringState: Causality.StateValue {
     let string: String
 }
-fileprivate struct NumberState: Causality.State {
+fileprivate struct NumberState: Causality.StateValue {
     let number: Int
 }
-fileprivate let InterestingString = Causality.StatefulEvent<StringState>(name: "Foo")
-fileprivate let FunNumber = Causality.StatefulEvent<NumberState>(name: "Foo")
+fileprivate let InterestingString = Causality.State<StringState>(name: "Foo")
+fileprivate let FunNumber = Causality.State<NumberState>(name: "Foo")
 
 final class StateTests: XCTestCase {
 
@@ -36,7 +36,7 @@ final class StateTests: XCTestCase {
         let resolvedValue: StringState?
         let bus = Causality.Bus(name: "\(#function)")
 
-        bus.publish(event: InterestingString, state: inputValue)
+        bus.set(state: InterestingString, value: inputValue)
 
         let hasState = bus.hasState(event: InterestingString)
         resolvedValue = bus.getState(event: InterestingString)
@@ -71,7 +71,7 @@ final class StateTests: XCTestCase {
         let bus = Causality.Bus(name: "\(#function)")
         let g = DispatchGroup()
 
-        bus.publish(event: InterestingString, state: inputValue)
+        bus.set(state: InterestingString, value: inputValue)
 
         g.enter()
         _ = bus.subscribe(InterestingString) { state in
@@ -101,7 +101,7 @@ final class StateTests: XCTestCase {
             resolvedValue = state
         }
 
-        bus.publish(event: InterestingString, state: inputValue)
+        bus.set(state: InterestingString, value: inputValue)
 
         let result = g.wait(timeout: DispatchTime.now()+2)
 
@@ -117,7 +117,7 @@ final class StateTests: XCTestCase {
         let bus = Causality.Bus(name: "\(#function)")
         let g = DispatchGroup()
 
-        bus.publish(event: InterestingString, state: stateValue)
+        bus.set(state: InterestingString, value: stateValue)
 
         g.enter()
         _ = bus.subscribe(InterestingString) { state in
@@ -126,7 +126,7 @@ final class StateTests: XCTestCase {
             resolvedStateChangeCount += 1
         }
 
-        bus.publish(event: InterestingString, state: stateValue)
+        bus.set(state: InterestingString, value: stateValue)
 
         let result = g.wait(timeout: DispatchTime.now()+2)
 
@@ -146,8 +146,8 @@ final class StateTests: XCTestCase {
             resolvedStateChangeCount += 1
         }
 
-        bus.publish(event: InterestingString, state: stateValue1)
-        bus.publish(event: InterestingString, state: stateValue2)
+        bus.set(state: InterestingString, value: stateValue1)
+        bus.set(state: InterestingString, value: stateValue2)
 
         sleep(1)
 

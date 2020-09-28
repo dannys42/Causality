@@ -1,27 +1,27 @@
 //
-//  Subscriber.swift
+//  StateSubscriber.swift
 //  
 //
-//  Created by Danny Sung on 09/20/2020.
+//  Created by Danny Sung on 09/28/2020.
 //
 
 import Foundation
 
-public protocol AnyEventSubscriber: AnySubscriber {
+public protocol AnyStateSubscriber: AnySubscriber {
 
 }
 
-internal class EventSubscriber<Message: Causality.Message>: AnyEventSubscriber {
-    typealias SubscriptionHandler = (AnyEventSubscriber, Message)->Void
+internal class StateSubscriber<State: Causality.StateValue>: AnyStateSubscriber {
+    typealias SubscriptionHandler = (AnyStateSubscriber, State)->Void
 
     let id: Causality.SubscriptionId
     let bus: Causality.Bus
-    let event: Causality.Event<Message>
+    let event: Causality.State<State>
     let handler: SubscriptionHandler
     let workQueue: WorkQueue
     var state: Causality.SubscriptionState
 
-    init(bus: Causality.Bus, event: Causality.Event<Message>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
+    init(bus: Causality.Bus, event: Causality.State<State>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
         self.id = UUID()
         self.bus = bus
         self.event = event
@@ -34,4 +34,3 @@ internal class EventSubscriber<Message: Causality.Message>: AnyEventSubscriber {
         self.bus.unsubscribe(self)
     }
 }
-

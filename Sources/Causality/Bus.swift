@@ -14,8 +14,6 @@ public extension Causality {
     /// A default/global bus
     static let bus = Bus(name: "global", queue: globalQueue)
 
-    typealias Subscription = AnyEventSubscriber
-
     enum SubscriptionState {
         case `continue`
         case unsubscribePending
@@ -42,12 +40,14 @@ public extension Causality {
             self.queue = queue
         }
 
-        internal var subscribers: [SubscriptionId:AnySubscriber] = [:]
+        // MARK: Event
+
+        internal var eventSubscribers: [SubscriptionId:AnyEventSubscriber] = [:]
 
         // MARK: State
 
         internal var stateSubscribers: [SubscriptionId:AnyStateSubscriber] = [:]
-        internal var state: [AnyStatefulEvent:Causality.AnyState] = [:]
+        internal var state: [AnyState:Causality.AnyStateValue] = [:]
 
     }
 }
