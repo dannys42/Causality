@@ -29,6 +29,16 @@ internal enum WorkQueue {
             self = .none
         }
     }
+
+    /// Return the current WorkQueue, unless it is .none.  If it is .none, return the passed queue instead.
+    /// - Parameter queue: The queue to pass if the self == .none
+    /// - Returns: `self` or `queue`
+    func withDefault(_ queue: WorkQueue) -> WorkQueue {
+        if self == .none {
+            return queue
+        }
+        return self
+    }
 }
 
 extension WorkQueue {

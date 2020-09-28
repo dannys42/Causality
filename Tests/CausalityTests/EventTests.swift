@@ -1,14 +1,14 @@
 import XCTest
 @testable import Causality
 
-struct Message1: Causality.Message {
+fileprivate struct Message1: Causality.Message {
     let string: String
 }
-struct Message2: Causality.Message {
+fileprivate struct Message2: Causality.Message {
     let number: Int
 }
-let stringEvent = Causality.Event<Message1>(name: "Foo")
-let numberEvent = Causality.Event<Message2>(name: "Foo")
+fileprivate let stringEvent = Causality.Event<Message1>(name: "Foo")
+fileprivate let numberEvent = Causality.Event<Message2>(name: "Foo")
 
 final class CausalityTests: XCTestCase {
 
@@ -76,6 +76,16 @@ final class CausalityTests: XCTestCase {
 
         XCTAssertEqual(subscriberCount, 1, "Expected subscriberCount: \(expectedSubscriberCount). Got \(subscriberCount)")
     }
+
+//    func testThat_CanSubscribeToAnyMessage() {
+//        let anyEvent = Causality.Event<Any>
+//
+//        let event = Causality.Bus(name: "\(#function)")
+//        event.subscribe(anyEvent) { _ in
+//
+//        }
+//
+//    }
 
     func testPerformanceOf_Signal() {
         var didTimeout = false

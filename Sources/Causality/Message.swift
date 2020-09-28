@@ -17,4 +17,5 @@ public extension Causality {
         }
         internal static let message = NoMessage()
     }
+
 }
