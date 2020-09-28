@@ -15,10 +15,11 @@ public extension Causality {
     static let bus = Bus(name: "global", queue: globalQueue)
 
     /// Subscriptions can be in the following states:
-    ///  - active: handler will be called when appropriate
-    ///  - unsubscribePending: handler will no longer be called.  The subscription will be removed at the next opportunity.
     enum SubscriptionState {
+        /// handler will be called when appropriate
         case active
+
+        /// handler will no longer be called.  The subscription will be removed at the next opportunity.
         case unsubscribePending
     }
 
