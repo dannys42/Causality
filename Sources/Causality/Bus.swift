@@ -51,7 +51,7 @@ public extension Causality {
         // MARK: State
 
         internal var stateSubscribers: [SubscriptionId:CausalityStateSubscription] = [:]
-        internal var state: [AnyState:Causality.AnyStateValue] = [:]
+        internal var state: [Causality.AnyHashableState:Causality.AnyStateValue] = [:]
 
     }
 }
