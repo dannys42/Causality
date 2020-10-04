@@ -93,9 +93,9 @@ final class CausalityTests: XCTestCase {
     }
 
     func testThat_DynamicAddressingWithIdenticalParameters_IsTreatedIdentically() {
-
-        let expectedEventCount = 1
-        var resolvedEventCount = 0
+        let inputValues = [ "a", "b", "c", "d" ]
+        let expectedValues = [ "b" ]
+        var resolvedValues: [String] = []
 
         let event = Causality.Bus(name: "\(#function)")
         class MyEvent<Message: Causality.Message>: Causality.DynamicEvent<Message> {
@@ -105,30 +105,40 @@ final class CausalityTests: XCTestCase {
             init(eventId: Int) {
                 self.eventId = eventId
             }
+            enum CodingKeys: CodingKey {
+                case eventId
+            }
+            override func encode(to encoder: Encoder) throws {
+                try super.encode(to: encoder)
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(self.eventId, forKey: .eventId)
+            }
         }
 
         let expectation = XCTestExpectation()
 
         // specifically testing that separate instances of identical types are treated identically
-        let event1a = MyEvent<Causality.NoMessage>(eventId: 1)
-        let event1b = MyEvent<Causality.NoMessage>(eventId: 1)
-        let event2 = MyEvent<Causality.NoMessage>(eventId: 2)
+        let event1a = MyEvent<Message1>(eventId: 1)
+        let event1b = MyEvent<Message1>(eventId: 1)
+        let event2 = MyEvent<Message1>(eventId: 2)
+        let event3 = MyEvent<Causality.NoMessage>(eventId: 3)
 
         let subscription = event.subscribe(event1a) { (message) in
             defer {
                 expectation.fulfill()
             }
 
-            resolvedEventCount += 1
+            resolvedValues.append(message.string)
         }
 
-        event.publish(event: event2)
-        event.publish(event: event1b)
+        event.publish(event: event2, message: Message1(string: inputValues[0]))
+        event.publish(event: event1b, message: Message1(string: inputValues[1]))
+        event.publish(event: event3)
 
         wait(for: [expectation], timeout: 2)
         subscription.unsubscribe()
 
-        XCTAssertEqual(expectedEventCount, resolvedEventCount, "Expected \(expectedEventCount).  Got: \(resolvedEventCount)")
+        XCTAssertEqual(expectedValues, resolvedValues, "Expected \(expectedValues).  Got: \(resolvedValues)")
     }
 
 

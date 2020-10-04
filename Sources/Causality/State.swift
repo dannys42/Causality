@@ -24,16 +24,14 @@ public extension Causality {
 
     typealias AnyHashableState = AnyHashable
 
-    class AnyState<State: Causality.StateValue>: CausalityAnyState {
+    class AnyState<Value: Causality.StateValue>: CausalityAnyState {
         public var causalityStateId: AnyHashable
 
         init() {
             self.causalityStateId = AnyHashable(UUID())
 
-            if let dynamicSelf = self as? Causality.DynamicState<State> {
+            if let dynamicSelf = self as? Causality.DynamicState<Value> {
                 self.causalityStateId = dynamicSelf.hashOfCodableValues
-
-                print(" Dynamic type has id of: \(self.causalityStateId)")
             }
         }
     }
@@ -45,10 +43,10 @@ public extension Causality {
     /// static let SomeState = Causality.State<Int>(name: "Some State")
     /// ```
     /// This declares `SomeState` as an state that will pass an `Int` to subscribers whenever the value changes.
-    class State<Value: Causality.StateValue>: Causality.CustomState<Value> {
+    class State<Value: Causality.StateValue>: Causality.AnyState<Value> & Hashable {
         public let name: String
 
-        internal let id: StateId
+        private let id: StateId
 
         init(name: String) {
             self.name = name
@@ -65,7 +63,6 @@ public extension Causality {
             hasher.combine(self.id)
         }
     }
-    typealias CustomState<State: Causality.StateValue> = Causality.AnyState<State>
 
     class DynamicState<State: Causality.StateValue>: Causality.AnyState<State> & Encodable {
     }
