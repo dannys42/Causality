@@ -48,7 +48,7 @@ public extension Causality {
     /// static let SomeState = Causality.State<Int>(name: "Some State")
     /// ```
     /// This declares `SomeState` as an state that will pass an `Int` to subscribers whenever the value changes.
-    class State<State: Causality.StateValue>: Causality.CustomState<State> {
+    class State<Value: Causality.StateValue>: Causality.CustomState<Value> {
         public let name: String
 
         internal let id: StateId
@@ -61,7 +61,7 @@ public extension Causality {
             self.causalityStateId = AnyHashable(self.id)
         }
 
-        public static func == (lhs: Causality.State<State>, rhs: Causality.State<State>) -> Bool {
+        public static func == (lhs: Causality.State<Value>, rhs: Causality.State<Value>) -> Bool {
             return lhs.id == rhs.id
         }
         public func hash(into hasher: inout Hasher) {
