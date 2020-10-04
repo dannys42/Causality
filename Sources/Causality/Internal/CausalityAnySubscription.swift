@@ -11,9 +11,8 @@ public protocol CausalityAnySubscription: AnyObject {
     var id: Causality.SubscriptionId { get }
 
     /// The current state of the subscription
-    var subscriptionState: Causality.SubscriptionState { get }
+    var status: Causality.SubscriptionStatus { get }
 
     /// The handler for this subscription will no longer be called after an `unsubscribe()
     func unsubscribe()
 }
-

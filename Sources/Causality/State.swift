@@ -22,9 +22,6 @@ public extension Causality {
     /// Custom type for `State` info
     typealias StateValue = AnyStateValue & Equatable
 
-    /// Subscription info for states.  Used to `unsubscribe()`.
-    typealias StateSubscription = CausalityStateSubscription
-
     typealias AnyHashableState = AnyHashable
 
     class AnyState<State: Causality.StateValue>: CausalityAnyState {
@@ -82,7 +79,7 @@ extension Causality.Bus {
     /// Determine if a state has an existing value
     /// - Parameter state: State to check
     /// - Returns: True if state has an existing value; False otherwise.
-    public func hasState<Value: Causality.StateValue>(_ state: Causality.AnyState<Value>) -> Bool {
+    public func hasState<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ state: State) -> Bool {
         var doesExist = false
         self.queue.sync {
             doesExist = (self.state[state.causalityStateId] != nil)
@@ -93,7 +90,7 @@ extension Causality.Bus {
     /// Get the last known value for a state
     /// - Parameter state: State to check
     /// - Returns: Value of state
-    public func getState<Value: Causality.StateValue>(_ state: Causality.AnyState<Value>) -> Value? {
+    public func getState<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ state: State) -> Value? {
         var value: Value?
 
         self.queue.sync {
@@ -110,7 +107,7 @@ extension Causality.Bus {
     /// - Parameters:
     ///   - state: The state to set the value for
     ///   - value: The value to set for the given state
-    public func set<Value: Causality.StateValue>(state: Causality.AnyState<Value>, value: Value) {
+    public func set<State: Causality.AnyState<Value>, Value: Causality.StateValue>(state: State, value: Value) {
 
         self.set(state: state, value: value, workQueue: .none)
     }
@@ -123,7 +120,7 @@ extension Causality.Bus {
     ///   - queue: DispatchQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
     ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
     @discardableResult
-    public func subscribe<Value: Causality.StateValue>(_ state: Causality.AnyState<Value>, queue: DispatchQueue?=nil, handler: @escaping (Causality.StateSubscription, Value)->Void) -> Causality.StateSubscription {
+    public func subscribe<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ state: State, queue: DispatchQueue?=nil, handler: @escaping (Causality.StateSubscription<State,Value>, Value)->Void) -> Causality.StateSubscription<State, Value> {
         let workQueue = WorkQueue(queue)
         return self.subscribe(state, workQueue: workQueue, handler: handler)
     }
@@ -134,7 +131,7 @@ extension Causality.Bus {
     ///   - queue: OperationQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
     ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
     @discardableResult
-    public func subscribe<Value: Causality.StateValue>(_ state: Causality.AnyState<Value>, queue: OperationQueue, handler: @escaping (Causality.StateSubscription, Value)->Void) -> Causality.StateSubscription {
+    public func subscribe<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ state: State, queue: OperationQueue, handler: @escaping (Causality.StateSubscription<State, Value>, Value)->Void) -> Causality.StateSubscription<State, Value> {
 
         return self.subscribe(state, workQueue: .operation(queue), handler: handler)
     }
@@ -146,7 +143,7 @@ extension Causality.Bus {
     ///   - state: The state to subscribe to.
     ///   - queue: DispatchQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
     ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
-    public func subscribe<Value: Causality.StateValue>(_ state: Causality.AnyState<Value>, queue: DispatchQueue?=nil, handler: @escaping (Value)->Void) -> Causality.StateSubscription {
+    public func subscribe<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ state: State, queue: DispatchQueue?=nil, handler: @escaping (Value)->Void) -> Causality.StateSubscription<State, Value> {
         let workQueue = WorkQueue(queue)
         return self.subscribe(state, workQueue: workQueue) { _, state in
             handler(state)
@@ -158,7 +155,7 @@ extension Causality.Bus {
     ///   - state: The event type to subscribe to.
     ///   - queue: OperationQueue to receive messages on.  This will take precedence over any queue specified by the publisher.
     ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
-    public func subscribe<Value: Causality.StateValue>(_ state: Causality.AnyState<Value>, queue: OperationQueue, handler: @escaping (Value)->Void) -> Causality.StateSubscription {
+    public func subscribe<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ state: State, queue: OperationQueue, handler: @escaping (Value)->Void) -> Causality.StateSubscription<State, Value> {
 
         return self.subscribe(state, workQueue: .operation(queue)) { _, state in
             handler(state)
@@ -170,13 +167,13 @@ extension Causality.Bus {
     /// Stop a particular subscription handler from listening to state changes anymore.
     /// - Parameters:
     ///   - subscription: The Subscription that was returned from `subscribe()`
-    public func unsubscribe(_ subscription: Causality.StateSubscription) {
+    public func unsubscribe<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ subscription: Causality.StateSubscription<State, Value>) {
         self.unsubscribe([subscription])
     }
 
     /// Unsubscribe an array of subscriptions
     /// - Parameter subscriptions: Subscriptions to unsubscribe from
-    public func unsubscribe(_ subscriptions: [Causality.StateSubscription]) {
+    public func unsubscribe<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ subscriptions: [Causality.StateSubscription<State, Value>]) {
         self.queue.async {
             var newSubscribers = self.eventSubscribers
             for subscription in subscriptions {
@@ -193,9 +190,9 @@ extension Causality.Bus {
     ///   - state: The state to subscribe to
     ///   - workQueue: The queue on which to execute the handler
     ///   - handler: A handler that is called when the state changes.  If there was a previous value, the handler be called immediately with the old value.
-    private func subscribe<Value: Causality.StateValue>(_ state: Causality.AnyState<Value>, workQueue: WorkQueue, handler: @escaping (Causality.StateSubscription, Value)->Void) -> Causality.StateSubscription {
+    private func subscribe<State: Causality.AnyState<Value>, Value: Causality.StateValue>(_ state: State, workQueue: WorkQueue, handler: @escaping (Causality.StateSubscription<State, Value>, Value)->Void) -> Causality.StateSubscription<State, Value> {
 
-        let subscriber = StateSubscriber(bus: self, state: state, handler: handler, workQueue: workQueue)
+        let subscriber = Causality.StateSubscription(bus: self, state: state, handler: handler, workQueue: workQueue)
         self.queue.async {
             self.stateSubscribers[subscriber.id] = subscriber
 
@@ -221,7 +218,7 @@ extension Causality.Bus {
     ///   - state: State info to check & send
     ///   - value: Value to set for the given state
     ///   - workQueue: Work used to call handler (if none provided by subscriber)
-    private func set<Value: Causality.StateValue>(state: Causality.AnyState<Value>, value: Value, workQueue: WorkQueue) {
+    private func set<State: Causality.AnyState<Value>, Value: Causality.StateValue>(state: State, value: Value, workQueue: WorkQueue) {
 
         self.queue.sync {
             // If an existing state exists and is the same state, do nothing
@@ -233,10 +230,10 @@ extension Causality.Bus {
 
             let subscribers = self.stateSubscribers
             for (_, someSubscriber) in subscribers {
-                guard let subscriber = someSubscriber as? StateSubscriber<Value> else {
+                guard let subscriber = someSubscriber as? Causality.StateSubscription<State,Value> else {
                     continue
                 }
-                guard subscriber.subscriptionState != .unsubscribePending else {
+                guard subscriber.status != .unsubscribePending else {
                     continue
                 }
                 guard subscriber.state.causalityStateId == state.causalityStateId else {
@@ -253,7 +250,7 @@ extension Causality.Bus {
         }
     }
 
-    private func lastStateValue<Value: Causality.StateValue>(state: Causality.AnyState<Value>) -> Value? {
+    private func lastStateValue<State: Causality.AnyState<Value>, Value: Causality.StateValue>(state: State) -> Value? {
         return self.state[state.causalityStateId] as? Value
     }
 }

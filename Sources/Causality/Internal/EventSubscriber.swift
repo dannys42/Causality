@@ -20,7 +20,7 @@ internal class EventSubscriber<Message: Causality.Message>: CausalityEventSubscr
     let event: Causality.AnyEvent<Message>
     let handler: SubscriptionHandler
     let workQueue: WorkQueue
-    var subscriptionState: Causality.SubscriptionState
+    var status: Causality.SubscriptionStatus
 
     init(bus: Causality.Bus, event: Causality.AnyEvent<Message>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
         self.id = UUID()
@@ -28,7 +28,7 @@ internal class EventSubscriber<Message: Causality.Message>: CausalityEventSubscr
         self.event = event
         self.handler = handler
         self.workQueue = workQueue
-        self.subscriptionState = .active
+        self.status = .active
     }
 
     public func unsubscribe() {

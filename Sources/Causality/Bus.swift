@@ -14,8 +14,8 @@ public extension Causality {
     /// A default/global bus
     static let bus = Bus(name: "global", queue: globalQueue)
 
-    /// Subscriptions can be in the following states:
-    enum SubscriptionState {
+    /// Subscriptions can have the following statuses:
+    enum SubscriptionStatus {
         /// handler will be called when appropriate
         case active
 
@@ -50,7 +50,7 @@ public extension Causality {
 
         // MARK: State
 
-        internal var stateSubscribers: [SubscriptionId:CausalityStateSubscription] = [:]
+        internal var stateSubscribers: [SubscriptionId:CausalityAnyStateSubscription] = [:]
         internal var state: [Causality.AnyHashableState:Causality.AnyStateValue] = [:]
 
     }

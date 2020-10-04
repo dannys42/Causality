@@ -173,7 +173,7 @@ extension Causality.Bus {
                 guard let subscriber = someSubscriber as? EventSubscriber<Message> else {
                     continue
                 }
-                guard subscriber.subscriptionState != .unsubscribePending else {
+                guard subscriber.status != .unsubscribePending else {
                     continue
                 }
                 let runQueue = subscriber.workQueue.withDefault(workQueue)
