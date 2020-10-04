@@ -158,7 +158,7 @@ Similar to Events, States have defined values.  However `StateValue`s must be Eq
 
 
 ```swift
-struct PlayerValue: Causality.StateValue {
+struct PlayerInfo: Causality.StateValue {
     let numberOfLives: Int
     let health: Int
     let armor: Int
@@ -170,15 +170,15 @@ struct PlayerValue: Causality.StateValue {
 Declaring a state with the associated value:
 
 ```swift
-let playerState = Causality.State<PlayerValue>(name: "Player State")
+let playerState = Causality.State<PlayerInfo>(name: "Player State")
 ```
 
 Or categorize your events:
 
 ```swift
 struct GameStates {
-    static let playerState1 = Causality.State<PlayerValue>(name: "Player 1 State")
-    static let playerState2 = Causality.State<PlayerValue>(name: "Player 2 State")
+    static let playerState1 = Causality.State<PlayerInfo>(name: "Player 1 State")
+    static let playerState2 = Causality.State<PlayerInfo>(name: "Player 2 State")
 }
 ```
 
@@ -211,7 +211,53 @@ If the state was previously set, the subscription handler will be called immedia
 
 ```swift
 Causality.bus.set(GameStates.playerState1, 
-    value: PlayerValue(numberOfLives: 3, health: 75, armor: 10))
+    value: PlayerInfo(numberOfLives: 3, health: 75, armor: 10))
+```
+
+
+## Dynamic States
+
+In the game example above, we have one Causality.State variable for every state.  But what if we have "n" number of players?  In that case, we can use Dynamic States.  Dynamic States allows you to parameterize your State.  Dynamic States are Codable and require you to define `CodingKeys` and to overload the `encode()` function to specify "key" parameters.  These parameters are used to uniquely identify the state.  For example:
+
+```
+class PlayerState<Value: PlayerInfo>: Causality.DynamicState<Value> {
+    let playerId: Int
+
+    init(playerId: Int) {
+        self.playerId = playerId
+    }
+    enum CodingKeys: CodingKey {
+        case playerId
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.playerId, forKey: .playerId)
+    }
+}
+```
+
+Now to subscribe:
+
+```swift
+
+Causality.bus.subscribe(PlayerState<PlayerInfo>(playerId: 1)) { subscription, message in
+    print("Current player info is: \(message))
+    resolvedStateValues.append(message.string)
+}
+
+```
+
+And to set/update a state:
+
+```swift
+
+event.set(state: PlayerState<PlayerInfo>(playerId: 1), 
+    value: PlayerInfo(
+        numberOfLines: 3,
+        health: 75,
+        armor: 100)
+
 ```
 
 

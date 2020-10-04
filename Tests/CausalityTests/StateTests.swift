@@ -153,4 +153,107 @@ final class StateTests: XCTestCase {
 
         XCTAssertEqual(resolvedStateChangeCount, expectedStateChangeCount, "Expected count: \(expectedStateChangeCount).  Instead got: \(resolvedStateChangeCount)")
     }
+
+    func testThat_DynamicAddressingWithIdenticalParameters_IsTreatedIdentically_ForPushAfterSubscribe() {
+        let inputValues = [1:"a", 2:"b"]
+        let expectedStateValues = ["a"]
+        var resolvedStateValues: [String] = []
+
+        let event = Causality.Bus(name: "\(#function)")
+        class MyState<Value: Causality.StateValue>: Causality.DynamicState<Value> {
+            let stateId: Int
+            var foo: String = "blah"
+
+            init(stateId: Int) {
+                self.stateId = stateId
+            }
+            enum CodingKeys: CodingKey {
+                case stateId
+            }
+            override func encode(to encoder: Encoder) throws {
+                try super.encode(to: encoder)
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(self.stateId, forKey: .stateId)
+            }
+        }
+
+        // specifically testing that separate instances of identical types are treated identically
+        let state1a = MyState<StringState>(stateId: 1)
+        let state1b = MyState<StringState>(stateId: 1)
+        let state2 = MyState<StringState>(stateId: 2)
+
+        let g = DispatchGroup()
+        g.enter()
+        event.subscribe(state1a) { subscription, message in
+            defer {
+                g.leave()
+            }
+
+            print(message)
+            resolvedStateValues.append(message.string)
+        }
+
+        g.enter()
+        event.set(state: state1b, value: StringState(string: inputValues[1]!))
+        g.enter()
+        event.set(state: state2, value: StringState(string: inputValues[2]!))
+
+
+        _ = g.wait(timeout: .now() + 1)
+        XCTAssertEqual(expectedStateValues, resolvedStateValues, "Expeced state values: \(expectedStateValues)  Got instead: \(resolvedStateValues)")
+    }
+
+    func testThat_DynamicAddressingWithIdenticalParameters_IsTreatedIdentically_ForPushBeforeSubscribe() {
+        let inputValues = [1:"a", 2:"b", 3: "c"]
+        let expectedStateValues = ["a", "b"]
+        var resolvedStateValues: [String] = []
+
+        let event = Causality.Bus(name: "\(#function)")
+        class MyState<Value: Causality.StateValue>: Causality.DynamicState<Value> {
+            let stateId: Int
+            var foo: String = "blah"
+
+            init(stateId: Int) {
+                self.stateId = stateId
+            }
+            enum CodingKeys: CodingKey {
+                case stateId
+            }
+            override func encode(to encoder: Encoder) throws {
+                try super.encode(to: encoder)
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(self.stateId, forKey: .stateId)
+            }
+        }
+
+        // specifically testing that separate instances of identical types are treated identically
+        let state1a = MyState<StringState>(stateId: 1)
+        let state1b = MyState<StringState>(stateId: 1)
+        let state2 = MyState<StringState>(stateId: 2)
+
+        let g = DispatchGroup()
+        
+        g.enter()
+        event.set(state: state1b, value: StringState(string: inputValues[1]!))
+
+        g.enter()
+        event.subscribe(state1a) { subscription, message in
+            defer {
+                g.leave()
+            }
+
+            print(message)
+            resolvedStateValues.append(message.string)
+        }
+
+        g.enter()
+        event.set(state: state1a, value: StringState(string: inputValues[1]!))
+        event.set(state: state1b, value: StringState(string: inputValues[2]!))
+        event.set(state: state2, value: StringState(string: inputValues[3]!))
+
+
+        _ = g.wait(timeout: .now() + 1)
+        XCTAssertEqual(expectedStateValues, resolvedStateValues, "Expeced state values: \(expectedStateValues)  Got instead: \(resolvedStateValues)")
+    }
+
 }

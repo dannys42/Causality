@@ -114,20 +114,19 @@ final class CausalityTests: XCTestCase {
         let event1b = MyEvent<Causality.NoMessage>(eventId: 1)
         let event2 = MyEvent<Causality.NoMessage>(eventId: 2)
 
-        event.subscribe(event1a) { (subscription, message) in
+        let subscription = event.subscribe(event1a) { (message) in
             defer {
                 expectation.fulfill()
             }
 
             resolvedEventCount += 1
-            subscription.unsubscribe()
-
         }
 
         event.publish(event: event2)
         event.publish(event: event1b)
 
         wait(for: [expectation], timeout: 2)
+        subscription.unsubscribe()
 
         XCTAssertEqual(expectedEventCount, resolvedEventCount, "Expected \(expectedEventCount).  Got: \(resolvedEventCount)")
     }

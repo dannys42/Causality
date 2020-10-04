@@ -17,12 +17,12 @@ internal class StateSubscriber<State: Causality.StateValue>: CausalityStateSubsc
 
     let id: Causality.SubscriptionId
     let bus: Causality.Bus
-    let state: Causality.State<State>
+    let state: Causality.AnyState<State>
     let handler: SubscriptionHandler
     let workQueue: WorkQueue
     var subscriptionState: Causality.SubscriptionState
 
-    init(bus: Causality.Bus, state: Causality.State<State>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
+    init(bus: Causality.Bus, state: Causality.AnyState<State>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
         self.id = UUID()
         self.bus = bus
         self.state = state
