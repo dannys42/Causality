@@ -10,13 +10,13 @@ fileprivate struct Message2: Causality.Message {
 fileprivate let stringEvent = Causality.Event<Message1>(name: "Foo")
 fileprivate let numberEvent = Causality.Event<Message2>(name: "Foo")
 
-class MyEvent<Message: Causality.Message>: Causality.CustomEvent<Message> {
+class CustomEvent<Message: Causality.Message>: Causality.CustomEvent<Message> {
     let eventId: Int
 
     init(eventId: Int) {
         self.eventId = eventId
     }
-    static func == (lhs: MyEvent<Message>, rhs: MyEvent<Message>) -> Bool {
+    static func == (lhs: CustomEvent<Message>, rhs: CustomEvent<Message>) -> Bool {
         return lhs.eventId == rhs.eventId
     }
     func hash(into hasher: inout Hasher) {
@@ -98,7 +98,7 @@ final class CausalityTests: XCTestCase {
         var resolvedValues: [String] = []
 
         let event = Causality.Bus(name: "\(#function)")
-        class MyEvent<Message: Causality.Message>: Causality.DynamicEvent<Message> {
+        class DynamicEvent<Message: Causality.Message>: Causality.DynamicEvent<Message> {
 
             let eventId: Int
 
@@ -118,10 +118,10 @@ final class CausalityTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         // specifically testing that separate instances of identical types are treated identically
-        let event1a = MyEvent<Message1>(eventId: 1)
-        let event1b = MyEvent<Message1>(eventId: 1)
-        let event2 = MyEvent<Message1>(eventId: 2)
-        let event3 = MyEvent<Causality.NoMessage>(eventId: 3)
+        let event1a = DynamicEvent<Message1>(eventId: 1)
+        let event1b = DynamicEvent<Message1>(eventId: 1)
+        let event2 = DynamicEvent<Message1>(eventId: 2)
+        let event3 = DynamicEvent<Causality.NoMessage>(eventId: 3)
 
         let subscription = event.subscribe(event1a) { (message) in
             defer {

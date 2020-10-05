@@ -7,7 +7,9 @@
 
 import Foundation
 
+/// Type-erased State
 public protocol CausalityAnyState: CausalityAddress & AnyObject {
+    /// A unique id used to compare states
     var causalityStateId: AnyHashable { get }
 }
 
@@ -16,14 +18,17 @@ public extension Causality {
     typealias AnyStateValue = Any
 
     /// Underlying type for StateIds (do not rely on this always being a UUID)
-    typealias StateId = UUID
+    internal typealias StateId = UUID
 
     /// Custom type for `State` info
     typealias StateValue = AnyStateValue & Equatable
 
-    typealias AnyHashableState = AnyHashable
+    internal typealias AnyHashableState = AnyHashable
 
+
+    /// Base class that `State<Causality.StateValue>` and `DynamicState<Causality.StateValue>` conform to.
     class AnyState<Value: Causality.StateValue>: CausalityAnyState {
+        /// A unique ID for each state.
         public var causalityStateId: AnyHashable
 
         init() {
@@ -43,6 +48,7 @@ public extension Causality {
     /// ```
     /// This declares `SomeState` as an state that will pass an `Int` to subscribers whenever the value changes.
     class State<Value: Causality.StateValue>: Causality.AnyState<Value> & Hashable {
+        /// A name assigned to the state.  This is not a key parameter and does not need to be unique.
         public let name: String
 
         private let id: StateId
@@ -63,6 +69,8 @@ public extension Causality {
         }
     }
 
+    /// `DynamicState` can be used if you need to uniquely identify states by paramter.
+    /// To properly declare your `DynamicState`, ensure you define your `CodingKeys` and override `encode()` to conform to Encodable.  All keys that you want to be included in the unique identification should be specified in `encode()`.
     class DynamicState<State: Causality.StateValue>: Causality.AnyState<State> & Encodable {
     }
 

@@ -19,12 +19,16 @@ extension Causality {
     public class EventSubscription<Event: Causality.AnyEvent<Message>, Message: Causality.Message>: CausalityAnyEventSubscription {
         typealias SubscriptionHandler = (EventSubscription<Event,Message>, Message)->Void
 
+        /// A unique identifier for the subscription
         public let id: Causality.SubscriptionId
+        /// The bus that the subscription is listening on
         public let bus: Causality.Bus
+        /// The event that was subscribed to
         public let event: Causality.AnyEvent<Message>
+        /// The running status of the subscription
+        public var status: Causality.SubscriptionStatus
         internal let handler: SubscriptionHandler
         internal let workQueue: WorkQueue
-        public var status: Causality.SubscriptionStatus
 
         init(bus: Causality.Bus, event: Causality.AnyEvent<Message>, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
             self.id = UUID()

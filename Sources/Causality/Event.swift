@@ -7,10 +7,6 @@
 
 import Foundation
 
-public protocol CausalityAddress {
-
-}
-
 public extension Causality {
 
     /// Underlying type for EventIds (do not rely on this always being a UUID)
@@ -18,6 +14,7 @@ public extension Causality {
 
     /// A type-erased form of an Event.  Callers usally do not need to worry about this.
     class AnyEvent<Message: Causality.Message>: CausalityAddress {
+        /// A unique identifier used to match events
         public var causalityEventId: AnyHashable
 
         init() {
@@ -62,6 +59,8 @@ public extension Causality {
     }
     typealias CustomEvent<Message: Causality.Message> = Causality.AnyEvent<Message> & Hashable
 
+    /// `DynamicEvent` can be used if you need to uniquely identify states by paramter.
+    /// To properly declare your `DynamicEvent`, ensure you define your `CodingKeys` and override `encode()` to conform to Encodable.  All keys that you want to be included in the unique identification should be specified in `encode()`.
     class DynamicEvent<Message: Causality.Message>: Causality.AnyEvent<Message> & Encodable {
     }
 

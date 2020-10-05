@@ -18,12 +18,17 @@ public extension Causality {
     class StateSubscription<State: Causality.AnyState<Value>, Value: Causality.StateValue>: CausalityAnyStateSubscription {
         typealias SubscriptionHandler = (Causality.StateSubscription<State,Value>, Value)->Void
 
+        /// A unique identifier for the subscription
         public let id: Causality.SubscriptionId
+        /// The bus that the subscription is listening on
         public let bus: Causality.Bus
+        /// The state that was subscribed to
         public let state: State
+        /// The running status of the subscription
+        public var status: Causality.SubscriptionStatus
+
         internal let handler: SubscriptionHandler
         internal let workQueue: WorkQueue
-        public var status: Causality.SubscriptionStatus
 
         internal init(bus: Causality.Bus, state: State, handler: @escaping SubscriptionHandler, workQueue: WorkQueue) {
             self.id = UUID()
