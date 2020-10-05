@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import StickyEncoding
 
 public protocol CausalityAnyState: CausalityAddress & AnyObject {
     var causalityStateId: AnyHashable { get }
