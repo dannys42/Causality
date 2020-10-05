@@ -92,6 +92,28 @@ final class CausalityTests: XCTestCase {
         XCTAssertEqual(subscriberCount, 1, "Expected subscriberCount: \(expectedSubscriberCount). Got \(subscriberCount)")
     }
 
+    func testThat_PlainStringMessage_CanBeSent() {
+        let inputString = "Hello World!"
+        let expectedString = inputString
+        var resolvedString: String? = nil
+
+        let event = Causality.Bus(name: "\(#function)")
+        let plainStringEvent = Causality.Event<String>(name: "plain String")
+
+        let expectation = XCTestExpectation()
+
+        event.subscribe(plainStringEvent) { (subscription, string) in
+            print("Got a string: \(string)")
+            resolvedString = string
+            expectation.fulfill()
+        }
+        event.publish(event: plainStringEvent, message: inputString)
+
+        wait(for: [expectation], timeout: 2)
+
+        XCTAssertEqual(expectedString, resolvedString, "Expected: \(expectedString)  Got instead: \(resolvedString ?? "(nil)")")
+    }
+
     func testThat_DynamicAddressingWithIdenticalParameters_IsTreatedIdentically() {
         let inputValues = [ "a", "b", "c", "d" ]
         let expectedValues = [ "b" ]

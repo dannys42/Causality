@@ -154,6 +154,30 @@ final class StateTests: XCTestCase {
         XCTAssertEqual(resolvedStateChangeCount, expectedStateChangeCount, "Expected count: \(expectedStateChangeCount).  Instead got: \(resolvedStateChangeCount)")
     }
 
+    func testThat_PlainString_CanBeValue() {
+        let inputString = "Hello World!"
+        let expectedString = inputString
+        var resolvedString: String? = nil
+
+        let event = Causality.Bus(name: "\(#function)")
+        let plainStringState = Causality.State<String>(name: "plain String")
+
+        let expectation = XCTestExpectation()
+
+        event.subscribe(plainStringState) { (subscription, string) in
+            print("Got a string: \(string)")
+            resolvedString = string
+            expectation.fulfill()
+        }
+        event.set(state: plainStringState, value: inputString)
+
+        wait(for: [expectation], timeout: 2)
+
+        XCTAssertEqual(expectedString, resolvedString, "Expected: \(expectedString)  Got instead: \(resolvedString ?? "(nil)")")
+    }
+
+
+
     func testThat_DynamicAddressingWithIdenticalParameters_IsTreatedIdentically_ForPushAfterSubscribe() {
         let inputValues = [1:"a", 2:"b"]
         let expectedStateValues = ["a"]
