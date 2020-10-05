@@ -241,24 +241,89 @@ Now to subscribe:
 
 ```swift
 
-Causality.bus.subscribe(PlayerState<PlayerInfo>(playerId: 1)) { subscription, message in
-    print("Current player info is: \(message))
-    resolvedStateValues.append(message.string)
+Causality.bus.subscribe(PlayerState<PlayerInfo>(playerId: 1)) { subscription, playerInfo in
+    print("Current player info is: \(playerInfo))
 }
 
+```
+
+Or to add more organization:
+
+```swift
+struct GameState {
+    static func playerState(_ playerId: Int) -> PlayerState<PlayerInfo> {
+        return PlayerState<PlayerInfo>(playerId: playerId)
+    }
+}
+
+Causality.bus.subscribe(GameState.playerState(1)) { subscription, playerInfo in
+    print("Current player info is: \(playerInfo)")
+}
 ```
 
 And to set/update a state:
 
 ```swift
 
-event.set(state: PlayerState<PlayerInfo>(playerId: 1), 
+event.set(state: GameState.playerState(1), 
     value: PlayerInfo(
         numberOfLines: 3,
         health: 75,
-        armor: 100)
+        armor: 100))
 
 ```
+
+## Dynamic Events
+
+Events can be parameterized by defining them in a similar way:
+
+```swift
+class MyEvent<Message: Causality.Message>: Causality.DynamicEvent<Message> {
+
+    let eventId: Int
+
+    init(eventId: Int) {
+        self.eventId = eventId
+    }
+    enum CodingKeys: CodingKey {
+        case eventId
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.eventId, forKey: .eventId)
+    }
+}
+```
+
+Then create the event:
+
+```swift
+struct MyEvents {
+    static func event(_ eventId: Int) -> MyEvent<InterestingMessage> {
+        return MyEvent<InterestingMessage>(eventId: eventId)
+    }
+}
+```
+
+
+Subscribe to the event:
+
+```swift
+let subscription = Causality.bus.subscribe(MyEvents.event(1)) { subscription, message in
+    print("A message from event \(subscription.event.eventId): \(message)")
+}
+```
+
+And publish events:
+
+```swift
+
+Causality.bus.publish(MyEvents.event(1), 
+    message: InterestingMessage(string: "Hello", number: 42))
+
+```
+
 
 
 ## API Documentation
