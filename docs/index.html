@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
            Docs
         </a>
-         (100% documented)
+         (98% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -47,13 +47,19 @@
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A7AddressP">CausalityAddress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A20AnyEventSubscriptionP">CausalityAnyEventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/CausalityAnyState.html">CausalityAnyState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A20AnyStateSubscriptionP">CausalityAnyStateSubscription</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A17EventSubscriptionP">CausalityEventSubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A17StateSubscriptionP">CausalityStateSubscription</a>
               </li>
             </ul>
           </li>
@@ -64,19 +70,37 @@
                 <a class="nav-group-task-link" href="Structs/Causality.html">Causality</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/Causality/SubscriptionState.html">– SubscriptionState</a>
+                <a class="nav-group-task-link" href="Structs/Causality/SubscriptionStatus.html">– SubscriptionStatus</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality/Bus.html">– Bus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/AnyEvent.html">– AnyEvent</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality/Event.html">– Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality.html#/s:9CausalityAAV12DynamicEventC">– DynamicEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/EventSubscription.html">– EventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/StateSubscription.html">– StateSubscription</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality.html#/s:9CausalityAAV9NoMessageV">– NoMessage</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/AnyState.html">– AnyState</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality.html#/s:9CausalityAAV12DynamicStateC">– DynamicState</a>
               </li>
             </ul>
           </li>
@@ -97,13 +121,15 @@
 </p>
 <h1 id='causality' class='heading'>Causality</h1>
 
-<p><code><a href="Structs/Causality.html">Causality</a></code> is simple in-memory event bus for Swift.  Events may have associated data and are fully typed.  All publish/subscribe methods are thread-safe.</p>
+<p><code><a href="Structs/Causality.html">Causality</a></code> is simple in-memory event bus for Swift.  Events may have an associated message and are fully typed.  All publish/subscribe methods are thread-safe.</p>
 
-<p>In addition, <code><a href="Structs/Causality.html">Causality</a></code> has provisions for monitoring State information.  State differs from Events in that:</p>
+<p>In addition, <code><a href="Structs/Causality.html">Causality</a></code> has provisions for monitoring <code>State</code> information.  <code>State</code> is similar to <code>Event</code>, but differ in that:</p>
 
 <ul>
-<li>State handlers will be called immediately with the last known good value (if one is available)</li>
-<li>State handlers will not be called if the state value is identical to the previous value</li>
+<li><code>State</code> handlers will be called immediately with the last known good value (if one is available)</li>
+<li><code>State</code> handlers will not be called if the state value is identical to the previous value</li>
+<li>Whereas an <code>Event</code> has an associated <code>Message</code>, a <code>State</code> has an associated <code>Value</code>.</li>
+<li>A state&rsquo;s <code>Value</code> must conform to the Equatable protocol.</li>
 </ul>
 <h2 id='installation' class='heading'>Installation</h2>
 <h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
@@ -124,14 +150,14 @@
 
 <p>This declares an event called <code>aTriggerEvent</code> that has no associated data.</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">MyEvents</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">aTriggerEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">NoSimpleEventMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"A Trigger"</span><span class="p">)</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">aTriggerEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">Causality</span><span class="o">.</span><span class="kt">NoMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"A Trigger"</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 <h4 id='subscribe-to-events' class='heading'>Subscribe to events</h4>
 
 <p>To subscribe to this event:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="n">aTriggerEvent</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Event happened"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Event was triggered"</span><span class="p">)</span>
 <span class="p">}</span>
 
 </code></pre>
@@ -142,10 +168,10 @@
 </code></pre>
 <h3 id='an-event-with-associated-data' class='heading'>An event with associated data</h3>
 
-<p>Events can include data of any type (referred to as a &ldquo;message&rdquo;).  The event label is fully type specified with the message.  So a subscriber will have a fully typed message available to its handler.</p>
+<p>Events can include data of any type (referred to as a <code>Message</code>).  The event label is fully type specified with the message.  So a subscriber will have a fully typed message available to its handler.</p>
 <h4 id='define-the-message' class='heading'>Define the Message</h4>
 
-<p>A message can be a standard Swift type like <code>Int</code>, <code>String</code>, etc.  Or it can be a <code>struct</code> or <code>class</code>.  In this example, we&rsquo;ll declare a struct:</p>
+<p>A message can be a standard Swift type like <code>Int</code>, <code>String</code>, etc.  Or it can be a <code>struct</code> or <code>class</code> that conform to <code><a href="Structs/Causality.html#/s:9CausalityAAV7Messagea">Causality.Message</a></code>.  Take care as to whether you want value or reference semantics for messages.  Generally, value semantics (i.e. a <code>struct</code>) will be safer.  In this example, we&rsquo;ll declare a struct:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">InterestingMessage</span><span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Message</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">string</span><span class="p">:</span> <span class="kt">String</span>
     <span class="k">let</span> <span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span>
@@ -153,58 +179,66 @@
 </code></pre>
 <h4 id='declare-the-event' class='heading'>Declare the event</h4>
 
+<p>Events may be declared with an associated <code>Message</code>.  If declared, the <code>Message</code> is a required typed parameter for publishing an event.  And similarly it will be supplied as a typed parameter to subscribers of the event.</p>
+
 <p>Declaring an event with a message:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">someEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">SomeMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Some Event"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">MyInterestingEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">SomeMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Some Event"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">MyStringEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"An event with a String message"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">MyNumberEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"An event with an Int message"</span><span class="p">)</span>
 </code></pre>
 
 <p>Or categorize your events:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">MyEvents</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">interestingEvent1</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">InterestingMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"An interesting Event 1"</span><span class="p">)</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">interestingEvent2</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">InterestingMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"An interesting Event 2"</span><span class="p">)</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">MyInterestingEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">InterestingMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"An interesting Event 1"</span><span class="p">)</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">MyStringEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"An event with a String message"</span><span class="p">)</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">MyNumberEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"An event with an Int message"</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 <h4 id='subscribing-and-unsubscribing-to-the-events' class='heading'>Subscribing and Unsubscribing to the events</h4>
 
 <p>Save your subscriptions to unsubscribe later:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="n">interestingEvent</span><span class="p">)</span> <span class="p">{</span> <span class="n">message</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"A message from interestingEvent: </span><span class="se">\(</span><span class="n">message</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="kt">MyInterestingEvent</span><span class="p">)</span> <span class="p">{</span> <span class="n">interestingMessage</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"A message from MyInterestingEvent: </span><span class="se">\(</span><span class="n">interestingMessage</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kt">Casaulity</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">unsubscribe</span><span class="p">(</span><span class="n">subscription</span><span class="p">)</span>
 </code></pre>
 
-<p>Or unsubscribe from within a subscription handler:</p>
-<pre class="highlight swift"><code><span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="n">interestingEvent</span><span class="p">)</span> <span class="p">{</span> <span class="n">subscription</span><span class="p">,</span> <span class="n">message</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"A message from interestingEvent: </span><span class="se">\(</span><span class="n">message</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<p>Or unsubscribe from within a subscription handler.  Here&rsquo;s an example of a one-shot event handler:</p>
+<pre class="highlight swift"><code><span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="kt">MyStringEvent</span><span class="p">)</span> <span class="p">{</span> <span class="n">subscription</span><span class="p">,</span> <span class="n">string</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"A string from MyStringEvent: </span><span class="se">\(</span><span class="n">string</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 
     <span class="n">subscription</span><span class="o">.</span><span class="nf">unsubscribe</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
 <h4 id='publish-events' class='heading'>Publish events</h4>
 
-<p>To publish/post an event of this type:</p>
-<pre class="highlight swift"><code><span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">publish</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="n">interestingEvent1</span><span class="p">,</span> 
+<p>To publish/post an event:</p>
+<pre class="highlight swift"><code><span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">publish</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="kt">MyInterestingEvent</span><span class="p">,</span> 
     <span class="nv">message</span><span class="p">:</span> <span class="kt">InterestingMessage</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"Hello"</span><span class="p">,</span> <span class="nv">number</span><span class="p">:</span> <span class="mi">42</span><span class="p">))</span>
 </code></pre>
+<h4 id='event-buses' class='heading'>Event Buses</h4>
+<h3 id='bus-alias' class='heading'>Bus Alias</h3>
 
 <p>Create aliases for your bus:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">eventBus</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span>
 
-<span class="n">eventBus</span><span class="o">.</span><span class="nf">publish</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="n">interestingEvent1</span><span class="p">,</span> 
+<span class="n">eventBus</span><span class="o">.</span><span class="nf">publish</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="kt">MyInterestingEvent</span><span class="p">,</span> 
     <span class="nv">message</span><span class="p">:</span> <span class="kt">InterestingMessage</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"Hello"</span><span class="p">,</span> <span class="nv">number</span><span class="p">:</span> <span class="mi">42</span><span class="p">))</span>
 </code></pre>
+<h3 id='local-buses' class='heading'>Local Buses</h3>
 
 <p>Or create local buses to isolate your events:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">newEventBus</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Bus</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"My local bus"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">newEventBus</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Bus</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"My local bus"</span><span class="p">)</span>
 
-<span class="n">newEventBus</span><span class="o">.</span><span class="nf">publish</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="n">interestingEvent1</span><span class="p">,</span> 
+<span class="n">newEventBus</span><span class="o">.</span><span class="nf">publish</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="n">interestingEvent</span><span class="p">,</span> 
     <span class="nv">message</span><span class="p">:</span> <span class="kt">InterestingMessage</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"Hello"</span><span class="p">,</span> <span class="nv">number</span><span class="p">:</span> <span class="mi">42</span><span class="p">))</span>
 </code></pre>
 <h2 id='state' class='heading'>State</h2>
 <h4 id='define-the-state-value' class='heading'>Define the State Value</h4>
 
-<p>Similar to Events, States have defined values.  However <code>StateValue</code>s must be Equatable. </p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">PlayerValue</span><span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">StateValue</span> <span class="p">{</span>
+<p>Similar to an <code>Event</code>, a <code>State</code> has an associated <code>Value</code>.  Values can be raw types such as <code>Int</code>, <code>String</code>, etc.  Or they may be <code>struct</code> or a <code>class</code>.  (Similar to a an event <code>Message</code>, you&rsquo;ll usually want to use a <code>struct</code>.)  However a <code>Value</code> must conform to <code>Equatable</code>. </p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">PlayerInfo</span><span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">StateValue</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">numberOfLives</span><span class="p">:</span> <span class="kt">Int</span>
     <span class="k">let</span> <span class="nv">health</span><span class="p">:</span> <span class="kt">Int</span>
     <span class="k">let</span> <span class="nv">armor</span><span class="p">:</span> <span class="kt">Int</span>
@@ -213,13 +247,13 @@
 <h4 id='declare-the-state' class='heading'>Declare the state</h4>
 
 <p>Declaring a state with the associated value:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">playerState</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">PlayerValue</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Player State"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">playerState</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">PlayerInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Player State"</span><span class="p">)</span>
 </code></pre>
 
-<p>Or categorize your events:</p>
+<p>Or categorize your states:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">GameStates</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">playerState1</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">PlayerValue</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Player 1 State"</span><span class="p">)</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">playerState2</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">PlayerValue</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Player 2 State"</span><span class="p">)</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">playerState1</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">PlayerInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Player 1 State"</span><span class="p">)</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">playerState2</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">PlayerInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Player 2 State"</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 <h4 id='subscribing-and-unsubscribing-to-state-changes' class='heading'>Subscribing and Unsubscribing to State changes</h4>
@@ -232,7 +266,7 @@
 <span class="kt">Casaulity</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">unsubscribe</span><span class="p">(</span><span class="n">subscription</span><span class="p">)</span>
 </code></pre>
 
-<p>Or unsubscribe from within a subscription handler:</p>
+<p>Or unsubscribe from within a subscription handler.  This example will monitor only a single state change:</p>
 <pre class="highlight swift"><code><span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">GameStates</span><span class="o">.</span><span class="n">playerState1</span><span class="p">)</span> <span class="p">{</span> <span class="n">subscription</span><span class="p">,</span> <span class="n">message</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"Player 1 state changed to: </span><span class="se">\(</span><span class="n">state</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 
@@ -243,7 +277,105 @@
 <p>If the state was previously set, the subscription handler will be called immediately with the last known value.  The subscription handler will only be called if subsequent <code>.set()</code> calls have differing values.</p>
 <h4 id='setting-state' class='heading'>Setting State</h4>
 <pre class="highlight swift"><code><span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="kt">GameStates</span><span class="o">.</span><span class="n">playerState1</span><span class="p">,</span> 
-    <span class="nv">value</span><span class="p">:</span> <span class="kt">PlayerValue</span><span class="p">(</span><span class="nv">numberOfLives</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nv">health</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="nv">armor</span><span class="p">:</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="nv">value</span><span class="p">:</span> <span class="kt">PlayerInfo</span><span class="p">(</span><span class="nv">numberOfLives</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nv">health</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="nv">armor</span><span class="p">:</span> <span class="mi">10</span><span class="p">))</span>
+</code></pre>
+<h2 id='dynamic-states' class='heading'>Dynamic States</h2>
+
+<p>In the game example above, we have one Causality.State variable for every state.  But what if we have &ldquo;n&rdquo; number of players?  In that case, we can use Dynamic States.  Dynamic States allows you to parameterize your State.  Dynamic States are Codable and require you to define <code>CodingKeys</code> and to overload the <code>encode()</code> function to specify &ldquo;key&rdquo; parameters.  These parameters are used to uniquely identify the state.  For example:</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PlayerState</span><span class="o">&lt;</span><span class="kt">Value</span><span class="p">:</span> <span class="kt">PlayerInfo</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">DynamicState</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">playerId</span><span class="p">:</span> <span class="kt">Int</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">playerId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">playerId</span> <span class="o">=</span> <span class="n">playerId</span>
+    <span class="p">}</span>
+    <span class="kd">enum</span> <span class="kt">CodingKeys</span><span class="p">:</span> <span class="kt">CodingKey</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">playerId</span>
+    <span class="p">}</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="k">super</span><span class="o">.</span><span class="nf">encode</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">encoder</span><span class="p">)</span>
+        <span class="k">var</span> <span class="nv">container</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="nf">container</span><span class="p">(</span><span class="nv">keyedBy</span><span class="p">:</span> <span class="kt">CodingKeys</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+        <span class="k">try</span> <span class="n">container</span><span class="o">.</span><span class="nf">encode</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">playerId</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="o">.</span><span class="n">playerId</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Now to subscribe:</p>
+<pre class="highlight swift"><code>
+<span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">PlayerState</span><span class="o">&lt;</span><span class="kt">PlayerInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">playerId</span><span class="p">:</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="n">subscription</span><span class="p">,</span> <span class="n">playerInfo</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Current player info is: </span><span class="se">\(</span><span class="n">playerInfo</span><span class="se">)</span><span class="s">)
+}
+
+</span></code></pre>
+
+<p>Or to add more organization:</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">GameState</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">playerState</span><span class="p">(</span><span class="n">_</span> <span class="nv">playerId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PlayerState</span><span class="o">&lt;</span><span class="kt">PlayerInfo</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">PlayerState</span><span class="o">&lt;</span><span class="kt">PlayerInfo</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">playerId</span><span class="p">:</span> <span class="n">playerId</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">GameState</span><span class="o">.</span><span class="nf">playerState</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="n">subscription</span><span class="p">,</span> <span class="n">playerInfo</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Current player info is: </span><span class="se">\(</span><span class="n">playerInfo</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>And to set/update a state:</p>
+<pre class="highlight swift"><code>
+<span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">GameState</span><span class="o">.</span><span class="nf">playerState</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> 
+                  <span class="nv">value</span><span class="p">:</span> <span class="kt">PlayerInfo</span><span class="p">(</span>
+                            <span class="nv">numberOfLines</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                            <span class="nv">health</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+                            <span class="nv">armor</span><span class="p">:</span> <span class="mi">100</span><span class="p">))</span>
+
+</code></pre>
+
+<p>Similarly, you could use base types of <code>Int</code>, <code>String</code>, etc. for the <code>Value</code>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">UserNameState</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"user name state"</span><span class="p">)</span>
+<span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">UserNameState</span><span class="p">)</span> <span class="p">{</span> <span class="n">username</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Username is now: </span><span class="se">\(</span><span class="n">username</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="kt">UserNameState</span><span class="p">,</span> <span class="s">"Mary Jane Doe"</span><span class="p">)</span>
+</code></pre>
+<h2 id='dynamic-events' class='heading'>Dynamic Events</h2>
+
+<p>Events can be parameterized by defining them in a similar way:</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MyEvent</span><span class="o">&lt;</span><span class="kt">Message</span><span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Message</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">DynamicEvent</span><span class="o">&lt;</span><span class="kt">Message</span><span class="o">&gt;</span> <span class="p">{</span>
+
+    <span class="k">let</span> <span class="nv">eventId</span><span class="p">:</span> <span class="kt">Int</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">eventId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">eventId</span> <span class="o">=</span> <span class="n">eventId</span>
+    <span class="p">}</span>
+    <span class="kd">enum</span> <span class="kt">CodingKeys</span><span class="p">:</span> <span class="kt">CodingKey</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">eventId</span>
+    <span class="p">}</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="k">super</span><span class="o">.</span><span class="nf">encode</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">encoder</span><span class="p">)</span>
+        <span class="k">var</span> <span class="nv">container</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="nf">container</span><span class="p">(</span><span class="nv">keyedBy</span><span class="p">:</span> <span class="kt">CodingKeys</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+        <span class="k">try</span> <span class="n">container</span><span class="o">.</span><span class="nf">encode</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">eventId</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="o">.</span><span class="n">eventId</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Then create the event:</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">MyEvents</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">event</span><span class="p">(</span><span class="n">_</span> <span class="nv">eventId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyEvent</span><span class="o">&lt;</span><span class="kt">InterestingMessage</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">MyEvent</span><span class="o">&lt;</span><span class="kt">InterestingMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">eventId</span><span class="p">:</span> <span class="n">eventId</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Subscribe to the event:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">subscription</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="nf">event</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="n">subscription</span><span class="p">,</span> <span class="n">message</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"A message from event </span><span class="se">\(</span><span class="n">subscription</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">eventId</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">message</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>And publish events:</p>
+<pre class="highlight swift"><code>
+<span class="kt">Causality</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="nf">publish</span><span class="p">(</span><span class="kt">MyEvents</span><span class="o">.</span><span class="nf">event</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> 
+    <span class="nv">message</span><span class="p">:</span> <span class="kt">InterestingMessage</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"Hello"</span><span class="p">,</span> <span class="nv">number</span><span class="p">:</span> <span class="mi">42</span><span class="p">))</span>
+
 </code></pre>
 <h2 id='api-documentation' class='heading'>API Documentation</h2>
 
@@ -268,7 +400,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-09-28)</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-05)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

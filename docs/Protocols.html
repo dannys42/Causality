@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
            Docs
         </a>
-         (100% documented)
+         (98% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -48,13 +48,19 @@
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A7AddressP">CausalityAddress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A20AnyEventSubscriptionP">CausalityAnyEventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/CausalityAnyState.html">CausalityAnyState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A20AnyStateSubscriptionP">CausalityAnyStateSubscription</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A17EventSubscriptionP">CausalityEventSubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols.html#/s:9Causality0A17StateSubscriptionP">CausalityStateSubscription</a>
               </li>
             </ul>
           </li>
@@ -65,19 +71,37 @@
                 <a class="nav-group-task-link" href="Structs/Causality.html">Causality</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/Causality/SubscriptionState.html">– SubscriptionState</a>
+                <a class="nav-group-task-link" href="Structs/Causality/SubscriptionStatus.html">– SubscriptionStatus</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality/Bus.html">– Bus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/AnyEvent.html">– AnyEvent</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality/Event.html">– Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality.html#/s:9CausalityAAV12DynamicEventC">– DynamicEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/EventSubscription.html">– EventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/StateSubscription.html">– StateSubscription</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality.html#/s:9CausalityAAV9NoMessageV">– NoMessage</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality/AnyState.html">– AnyState</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/Causality/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Causality.html#/s:9CausalityAAV12DynamicStateC">– DynamicState</a>
               </li>
             </ul>
           </li>
@@ -97,6 +121,33 @@
           <div class="section-content">
             <div class="task-group">
               <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9Causality0A7AddressP"></a>
+                    <a name="//apple_ref/swift/Protocol/CausalityAddress" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Causality0A7AddressP">CausalityAddress</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code>CausalityAddress</code> is an end-point that is used to identify a route or a state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityAddress</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -128,9 +179,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9Causality0A17EventSubscriptionP"></a>
-                    <a name="//apple_ref/swift/Protocol/CausalityEventSubscription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9Causality0A17EventSubscriptionP">CausalityEventSubscription</a>
+                    <a name="/s:9Causality0A20AnyEventSubscriptionP"></a>
+                    <a name="//apple_ref/swift/Protocol/CausalityAnyEventSubscription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Causality0A20AnyEventSubscriptionP">CausalityAnyEventSubscription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -145,7 +196,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityEventSubscription</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityAnyEventSubscription</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a></span></code></pre>
 
                         </div>
                       </div>
@@ -155,9 +206,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9Causality0A17StateSubscriptionP"></a>
-                    <a name="//apple_ref/swift/Protocol/CausalityStateSubscription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9Causality0A17StateSubscriptionP">CausalityStateSubscription</a>
+                    <a name="/s:9Causality0A20AnyStateSubscriptionP"></a>
+                    <a name="//apple_ref/swift/Protocol/CausalityAnyStateSubscription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Causality0A20AnyStateSubscriptionP">CausalityAnyStateSubscription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,7 +223,35 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityStateSubscription</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityAnyStateSubscription</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9Causality0A8AnyStateP"></a>
+                    <a name="//apple_ref/swift/Protocol/CausalityAnyState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9Causality0A8AnyStateP">CausalityAnyState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Type-erased State</p>
+
+                        <a href="Protocols/CausalityAnyState.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CausalityAnyState</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:9Causality0A7AddressP">CausalityAddress</a></span></code></pre>
 
                         </div>
                       </div>
@@ -187,7 +266,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-09-28)</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-05)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

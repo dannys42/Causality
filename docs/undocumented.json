@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/dannys/projects/Causality/Sources/Causality/Event.swift",
+      "line": 62,
+      "symbol": "Causality.CustomEvent",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/dannys/projects/Causality"
 }

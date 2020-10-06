@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Event Class Reference</title>
+    <title>AnyEvent Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/Event" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/AnyEvent" class="dashAnchor"></a>
 
-    <a title="Event Class Reference"></a>
+    <a title="AnyEvent Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../../index.html"> Reference</a>
       <img class="carat" src="../../img/carat.png" />
-      Event Class Reference
+      AnyEvent Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -111,21 +111,15 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>Event</h1>
+            <h1>AnyEvent</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Event</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="kt">Hashable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">AnyEvent</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols.html#/s:9Causality0A7AddressP">CausalityAddress</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Declare events to be used as endpoints for publish or subscribe calls.</p>
-
-<p>Example:</p>
-<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">SomeEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Some Event"</span><span class="p">)</span>
-</code></pre>
-
-<p>This declares <code>SomeEvent</code> as an event that will require an <code>Int</code> on publish and will pass the same <code>Int</code> to the subscription handler.</p>
+            <p>A type-erased form of an Event.  Callers usally do not need to worry about this.</p>
 
           </div>
         </section>
@@ -137,9 +131,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:SQ2eeoiySbx_xtFZ"></a>
-                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SQ2eeoiySbx_xtFZ">==(_:<wbr>_:<wbr>)</a>
+                    <a name="/s:9CausalityAAV8AnyEventC09causalityC2Ids0B8HashableVvp"></a>
+                    <a name="//apple_ref/swift/Property/causalityEventId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV8AnyEventC09causalityC2Ids0B8HashableVvp">causalityEventId</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -147,39 +141,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                        <p>A unique identifier used to match events</p>
 
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:SH4hash4intoys6HasherVz_tF"></a>
-                    <a name="//apple_ref/swift/Method/hash(into:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SH4hash4intoys6HasherVz_tF">hash(into:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hash</span><span class="p">(</span><span class="n">into</span> <span class="nv">hasher</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Hasher</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">causalityEventId</span><span class="p">:</span> <span class="kt">AnyHashable</span></code></pre>
 
                         </div>
                       </div>

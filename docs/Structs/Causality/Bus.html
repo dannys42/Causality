@@ -23,7 +23,7 @@
         <a class="header-link" href="../../index.html">
            Docs
         </a>
-         (100% documented)
+         (98% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -48,13 +48,19 @@
             <a class="nav-group-name-link" href="../../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Protocols.html#/s:9Causality0A7AddressP">CausalityAddress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Protocols.html#/s:9Causality0A20AnyEventSubscriptionP">CausalityAnyEventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Protocols/CausalityAnyState.html">CausalityAnyState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Protocols.html#/s:9Causality0A20AnyStateSubscriptionP">CausalityAnyStateSubscription</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Protocols.html#/s:9Causality0A17EventSubscriptionP">CausalityEventSubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Protocols.html#/s:9Causality0A17StateSubscriptionP">CausalityStateSubscription</a>
               </li>
             </ul>
           </li>
@@ -65,19 +71,37 @@
                 <a class="nav-group-task-link" href="../../Structs/Causality.html">Causality</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../../Structs/Causality/SubscriptionState.html">– SubscriptionState</a>
+                <a class="nav-group-task-link" href="../../Structs/Causality/SubscriptionStatus.html">– SubscriptionStatus</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Structs/Causality/Bus.html">– Bus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/Causality/AnyEvent.html">– AnyEvent</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Structs/Causality/Event.html">– Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/Causality.html#/s:9CausalityAAV12DynamicEventC">– DynamicEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/Causality/EventSubscription.html">– EventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/Causality/StateSubscription.html">– StateSubscription</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Structs/Causality.html#/s:9CausalityAAV9NoMessageV">– NoMessage</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/Causality/AnyState.html">– AnyState</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../../Structs/Causality/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../../Structs/Causality.html#/s:9CausalityAAV12DynamicStateC">– DynamicState</a>
               </li>
             </ul>
           </li>
@@ -107,9 +131,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC4nameSSvp"></a>
-                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC4nameSSvp">name</a>
+                    <a name="/s:9CausalityAAV3BusC5labelSSvp"></a>
+                    <a name="//apple_ref/swift/Property/label" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC5labelSSvp">label</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -124,7 +148,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -161,9 +185,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC4name5queueADSS_So012OS_dispatch_D0Ctcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(name:queue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC4name5queueADSS_So012OS_dispatch_D0Ctcfc">init(name:<wbr>queue:<wbr>)</a>
+                    <a name="/s:9CausalityAAV3BusC5label5queueADSS_So012OS_dispatch_D0Ctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(label:queue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC5label5queueADSS_So012OS_dispatch_D0Ctcfc">init(label:<wbr>queue:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -178,7 +202,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="n"><a href="../../Structs/Causality.html#/s:9CausalityAAV11globalQueueSo17OS_dispatch_queueCvpZ">globalQueue</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="n"><a href="../../Structs/Causality.html#/s:9CausalityAAV11globalQueueSo17OS_dispatch_queueCvpZ">globalQueue</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -189,7 +213,7 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>name</em>
+                                <em>label</em>
                                 </code>
                               </td>
                               <td>
@@ -232,9 +256,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC7publish5event7messageyAB5EventVy_xG_xtlF"></a>
+                    <a name="/s:9CausalityAAV3BusC7publish5event7messageyx_q_tAB8AnyEventCy_q_GRbzr0_lF"></a>
                     <a name="//apple_ref/swift/Method/publish(event:message:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC7publish5event7messageyAB5EventVy_xG_xtlF">publish(event:<wbr>message:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC7publish5event7messageyx_q_tAB8AnyEventCy_q_GRbzr0_lF">publish(event:<wbr>message:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -251,7 +275,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">publish</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">publish</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -305,9 +329,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC7publish5eventyAB5EventVy_AB9NoMessageVG_tF"></a>
+                    <a name="/s:9CausalityAAV3BusC7publish5eventyx_tAB8AnyEventCy_AB9NoMessageVGRbzlF"></a>
                     <a name="//apple_ref/swift/Method/publish(event:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC7publish5eventyAB5EventVy_AB9NoMessageVG_tF">publish(event:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC7publish5eventyx_tAB8AnyEventCy_AB9NoMessageVGRbzlF">publish(event:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -322,7 +346,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">publish</span><span class="p">(</span><span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV9NoMessageV">NoMessage</a></span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">publish</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">)</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV9NoMessageV">NoMessage</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -364,9 +388,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyAaH_p_xtctlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyAJ_q_tctAB03AnyF0Cy_q_GRbzr0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyAaH_p_xtctlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyAJ_q_tctAB03AnyF0Cy_q_GRbzr0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -382,7 +406,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -435,9 +459,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyAaH_p_xtctlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So16NSOperationQueueCyAJ_q_tctAB03AnyF0Cy_q_GRbzr0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyAaH_p_xtctlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So16NSOperationQueueCyAJ_q_tctAB03AnyF0Cy_q_GRbzr0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -453,7 +477,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -519,9 +543,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyxctlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyq_ctAB03AnyF0Cy_q_GRbzr0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyxctlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyq_ctAB03AnyF0Cy_q_GRbzr0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -537,7 +561,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -594,9 +618,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyxctlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So16NSOperationQueueCyq_ctAB03AnyF0Cy_q_GRbzr0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17EventSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyxctlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17EventSubscriptionCy_xq_Gx_So16NSOperationQueueCyq_ctAB03AnyF0Cy_q_GRbzr0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -612,7 +636,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -682,9 +706,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC11unsubscribeyyAA0A17EventSubscription_pF"></a>
+                    <a name="/s:9CausalityAAV3BusC11unsubscribeyyAB17EventSubscriptionCy_xq_GAB03AnyD0Cy_q_GRbzr0_lF"></a>
                     <a name="//apple_ref/swift/Method/unsubscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyyAA0A17EventSubscription_pF">unsubscribe(_:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyyAB17EventSubscriptionCy_xq_GAB03AnyD0Cy_q_GRbzr0_lF">unsubscribe(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -699,7 +723,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscription</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">unsubscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscription</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -728,9 +752,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC11unsubscribeyySayAA0A17EventSubscription_pGF"></a>
+                    <a name="/s:9CausalityAAV3BusC11unsubscribeyySayAB17EventSubscriptionCy_xq_GGAB03AnyD0Cy_q_GRbzr0_lF"></a>
                     <a name="//apple_ref/swift/Method/unsubscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyySayAA0A17EventSubscription_pGF">unsubscribe(_:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyySayAB17EventSubscriptionCy_xq_GGAB03AnyD0Cy_q_GRbzr0_lF">unsubscribe(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -745,7 +769,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriptions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a></span><span class="p">])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">unsubscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriptions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/EventSubscription.html">EventSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span><span class="p">])</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -787,9 +811,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC8hasStateySbAB0D0Vy_xGSQRzlF"></a>
+                    <a name="/s:9CausalityAAV3BusC8hasStateySbxAB03AnyD0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/hasState(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC8hasStateySbAB0D0Vy_xGSQRzlF">hasState(_:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC8hasStateySbxAB03AnyD0Cy_q_GRbzSQR_r0_lF">hasState(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -804,7 +828,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">hasState</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">hasState</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -837,9 +861,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC8getStateyxSgAB0D0Vy_xGSQRzlF"></a>
+                    <a name="/s:9CausalityAAV3BusC8getStateyq_SgxAB03AnyD0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/getState(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC8getStateyxSgAB0D0Vy_xGSQRzlF">getState(_:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC8getStateyq_SgxAB03AnyD0Cy_q_GRbzSQR_r0_lF">getState(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -854,7 +878,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">getState</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">getState</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Value</span><span class="p">?</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -900,9 +924,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC3set5state5valueyAB5StateVy_xG_xtSQRzlF"></a>
+                    <a name="/s:9CausalityAAV3BusC3set5state5valueyx_q_tAB8AnyStateCy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/set(state:value:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC3set5state5valueyAB5StateVy_xG_xtSQRzlF">set(state:<wbr>value:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC3set5state5valueyx_q_tAB8AnyStateCy_q_GRbzSQR_r0_lF">set(state:<wbr>value:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -919,7 +943,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">)</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">)</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -973,9 +997,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyAaH_p_xtctSQRzlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyAJ_q_tctAB03AnyF0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyAaH_p_xtctSQRzlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyAJ_q_tctAB03AnyF0Cy_q_GRbzSQR_r0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -991,7 +1015,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span><span class="p">,</span> <span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1044,9 +1068,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyAaH_p_xtctSQRzlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So16NSOperationQueueCyAJ_q_tctAB03AnyF0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyAaH_p_xtctSQRzlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So16NSOperationQueueCyAJ_q_tctAB03AnyF0Cy_q_GRbzSQR_r0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1062,7 +1086,7 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span><span class="p">,</span> <span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1128,9 +1152,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyxctSQRzlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyq_ctAB03AnyF0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So012OS_dispatch_D0CSgyxctSQRzlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So012OS_dispatch_D0CSgyq_ctAB03AnyF0Cy_q_GRbzSQR_r0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1145,7 +1169,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1198,9 +1222,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyxctSQRzlF"></a>
+                    <a name="/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So16NSOperationQueueCyq_ctAB03AnyF0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(_:queue:handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAA0A17StateSubscription_pAB0F0Vy_xG_So16NSOperationQueueCyxctSQRzlF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC9subscribe_5queue7handlerAB17StateSubscriptionCy_xq_Gx_So16NSOperationQueueCyq_ctAB03AnyF0Cy_q_GRbzSQR_r0_lF">subscribe(_:<wbr>queue:<wbr>handler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1215,7 +1239,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1281,9 +1305,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC11unsubscribeyyAA0A17StateSubscription_pF"></a>
+                    <a name="/s:9CausalityAAV3BusC11unsubscribeyyAB17StateSubscriptionCy_xq_GAB03AnyD0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/unsubscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyyAA0A17StateSubscription_pF">unsubscribe(_:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyyAB17StateSubscriptionCy_xq_GAB03AnyD0Cy_q_GRbzSQR_r0_lF">unsubscribe(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1298,7 +1322,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscription</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">unsubscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscription</span><span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1327,9 +1351,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV3BusC11unsubscribeyySayAA0A17StateSubscription_pGF"></a>
+                    <a name="/s:9CausalityAAV3BusC11unsubscribeyySayAB17StateSubscriptionCy_xq_GGAB03AnyD0Cy_q_GRbzSQR_r0_lF"></a>
                     <a name="//apple_ref/swift/Method/unsubscribe(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyySayAA0A17StateSubscription_pGF">unsubscribe(_:<wbr>)</a>
+                    <a class="token" href="#/s:9CausalityAAV3BusC11unsubscribeyySayAB17StateSubscriptionCy_xq_GGAB03AnyD0Cy_q_GRbzSQR_r0_lF">unsubscribe(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1344,7 +1368,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriptions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality.html#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a></span><span class="p">])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">unsubscribe</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscriptions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/StateSubscription.html">StateSubscription</a></span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span><span class="p">])</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1378,7 +1402,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-09-28)</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-05)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

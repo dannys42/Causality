@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
            Docs
         </a>
-         (100% documented)
+         (98% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -48,13 +48,19 @@
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols.html#/s:9Causality0A7AddressP">CausalityAddress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols.html#/s:9Causality0A20AnyEventSubscriptionP">CausalityAnyEventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/CausalityAnyState.html">CausalityAnyState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols.html#/s:9Causality0A20AnyStateSubscriptionP">CausalityAnyStateSubscription</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/CausalityAnySubscription.html">CausalityAnySubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols.html#/s:9Causality0A17EventSubscriptionP">CausalityEventSubscription</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols.html#/s:9Causality0A17StateSubscriptionP">CausalityStateSubscription</a>
               </li>
             </ul>
           </li>
@@ -65,19 +71,37 @@
                 <a class="nav-group-task-link" href="../Structs/Causality.html">Causality</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/Causality/SubscriptionState.html">– SubscriptionState</a>
+                <a class="nav-group-task-link" href="../Structs/Causality/SubscriptionStatus.html">– SubscriptionStatus</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/Causality/Bus.html">– Bus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Causality/AnyEvent.html">– AnyEvent</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/Causality/Event.html">– Event</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Causality.html#/s:9CausalityAAV12DynamicEventC">– DynamicEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Causality/EventSubscription.html">– EventSubscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Causality/StateSubscription.html">– StateSubscription</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/Causality.html#/s:9CausalityAAV9NoMessageV">– NoMessage</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Causality/AnyState.html">– AnyState</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/Causality/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Causality.html#/s:9CausalityAAV12DynamicStateC">– DynamicState</a>
               </li>
             </ul>
           </li>
@@ -161,9 +185,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV17SubscriptionStateO"></a>
-                    <a name="//apple_ref/swift/Enum/SubscriptionState" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV17SubscriptionStateO">SubscriptionState</a>
+                    <a name="/s:9CausalityAAV18SubscriptionStatusO"></a>
+                    <a name="//apple_ref/swift/Enum/SubscriptionStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV18SubscriptionStatusO">SubscriptionStatus</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -171,15 +195,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Subscriptions can be in the following states:</p>
+                        <p>Subscriptions can have the following statuses:</p>
 
-                        <a href="../Structs/Causality/SubscriptionState.html" class="slightly-smaller">See more</a>
+                        <a href="../Structs/Causality/SubscriptionStatus.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">SubscriptionState</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">SubscriptionStatus</span></code></pre>
 
                         </div>
                       </div>
@@ -245,33 +269,6 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV17EventSubscriptiona"></a>
-                    <a name="//apple_ref/swift/Alias/EventSubscription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV17EventSubscriptiona">EventSubscription</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Subscription info for events.  Used to <code>unsubscribe()</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">EventSubscription</span> <span class="o">=</span> <span class="kt"><a href="../Protocols.html#/s:9Causality0A17EventSubscriptionP">CausalityEventSubscription</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:9CausalityAAV7EventIda"></a>
                     <a name="//apple_ref/swift/Alias/EventId" class="dashAnchor"></a>
                     <a class="token" href="#/s:9CausalityAAV7EventIda">EventId</a>
@@ -299,9 +296,37 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV5EventV"></a>
-                    <a name="//apple_ref/swift/Struct/Event" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV5EventV">Event</a>
+                    <a name="/s:9CausalityAAV8AnyEventC"></a>
+                    <a name="//apple_ref/swift/Class/AnyEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV8AnyEventC">AnyEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type-erased form of an Event.  Callers usally do not need to worry about this.</p>
+
+                        <a href="../Structs/Causality/AnyEvent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">AnyEvent</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:9Causality0A7AddressP">CausalityAddress</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9CausalityAAV5EventC"></a>
+                    <a name="//apple_ref/swift/Class/Event" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV5EventC">Event</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -312,7 +337,7 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                         <p>Declare events to be used as endpoints for publish or subscribe calls.</p>
 
 <p>Example:</p>
-<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">SomeEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Some Event"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">SomeEvent</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">Event</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Some Event"</span><span class="p">)</span>
 </code></pre>
 
 <p>This declares <code>SomeEvent</code> as an event that will require an <code>Int</code> on publish and will pass the same <code>Int</code> to the subscription handler.</p>
@@ -323,7 +348,120 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Event</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">CausalityAnyEvent</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Event</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9CausalityAAV11CustomEventa"></a>
+                    <a name="//apple_ref/swift/Alias/CustomEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV11CustomEventa">CustomEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">CustomEvent</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt"><a href="../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9CausalityAAV12DynamicEventC"></a>
+                    <a name="//apple_ref/swift/Class/DynamicEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV12DynamicEventC">DynamicEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>DynamicEvent</code> can be used if you need to uniquely identify states by paramter.
+To properly declare your <code>DynamicEvent</code>, ensure you define your <code>CodingKeys</code> and override <code>encode()</code> to conform to Encodable.  All keys that you want to be included in the unique identification should be specified in <code>encode()</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">DynamicEvent</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt"><a href="../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="kt">Encodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9CausalityAAV17EventSubscriptionC"></a>
+                    <a name="//apple_ref/swift/Class/EventSubscription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV17EventSubscriptionC">EventSubscription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscription handler for Events.
+Used to <code>unsubscribe()</code> or determine the <code><a href="../Structs/Causality.html#/s:9CausalityAAV3busAB3BusCvpZ">bus</a></code> or <code>state</code> that triggered an update.</p>
+
+                        <a href="../Structs/Causality/EventSubscription.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">EventSubscription</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality/Event.html">Event</a></span><span class="p">,</span> <span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:9Causality0A20AnyEventSubscriptionP">CausalityAnyEventSubscription</a></span> <span class="k">where</span> <span class="kt"><a href="../Structs/Causality/Event.html">Event</a></span> <span class="p">:</span> <span class="kt"><a href="../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../Structs/Causality/AnyEvent.html">AnyEvent</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality.html#/s:9CausalityAAV7Messagea">Message</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9CausalityAAV17StateSubscriptionC"></a>
+                    <a name="//apple_ref/swift/Class/StateSubscription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV17StateSubscriptionC">StateSubscription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscription handler for States.
+Used to <code>unsubscribe()</code> or determine the <code><a href="../Structs/Causality.html#/s:9CausalityAAV3busAB3BusCvpZ">bus</a></code> or <code>state</code> that triggered an update.</p>
+
+                        <a href="../Structs/Causality/StateSubscription.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">StateSubscription</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality/State.html">State</a></span><span class="p">,</span> <span class="kt">Value</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:9Causality0A20AnyStateSubscriptionP">CausalityAnyStateSubscription</a></span> <span class="k">where</span> <span class="kt"><a href="../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt"><a href="../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -414,33 +552,6 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV7StateIda"></a>
-                    <a name="//apple_ref/swift/Alias/StateId" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV7StateIda">StateId</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Underlying type for StateIds (do not rely on this always being a UUID)</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">StateId</span> <span class="o">=</span> <span class="kt">UUID</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:9CausalityAAV10StateValuea"></a>
                     <a name="//apple_ref/swift/Alias/StateValue" class="dashAnchor"></a>
                     <a class="token" href="#/s:9CausalityAAV10StateValuea">StateValue</a>
@@ -468,9 +579,9 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV17StateSubscriptiona"></a>
-                    <a name="//apple_ref/swift/Alias/StateSubscription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV17StateSubscriptiona">StateSubscription</a>
+                    <a name="/s:9CausalityAAV8AnyStateC"></a>
+                    <a name="//apple_ref/swift/Class/AnyState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV8AnyStateC">AnyState</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -478,14 +589,15 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Subscription info for states.  Used to <code>unsubscribe()</code>.</p>
+                        <p>Base class that <code>State&lt;Causality.StateValue&gt;</code> and <code>DynamicState&lt;Causality.StateValue&gt;</code> conform to.</p>
 
+                        <a href="../Structs/Causality/AnyState.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">StateSubscription</span> <span class="o">=</span> <span class="kt"><a href="../Protocols.html#/s:9Causality0A17StateSubscriptionP">CausalityStateSubscription</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">AnyState</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/CausalityAnyState.html">CausalityAnyState</a></span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -495,9 +607,9 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:9CausalityAAV5StateV"></a>
-                    <a name="//apple_ref/swift/Struct/State" class="dashAnchor"></a>
-                    <a class="token" href="#/s:9CausalityAAV5StateV">State</a>
+                    <a name="/s:9CausalityAAV5StateC"></a>
+                    <a name="//apple_ref/swift/Class/State" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV5StateC">State</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -505,10 +617,10 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Declare states with typed values as labels to be used for <code>setState()</code> and <code>subscribe()</code> calls.</p>
+                        <p>Declare states with typed values as labels to be used for <code>set()</code> and <code>subscribe()</code> calls.</p>
 
 <p>Example:</p>
-<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">SomeState</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Some State"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">SomeState</span> <span class="o">=</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt">State</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"Some State"</span><span class="p">)</span>
 </code></pre>
 
 <p>This declares <code>SomeState</code> as an state that will pass an <code>Int</code> to subscribers whenever the value changes.</p>
@@ -519,7 +631,35 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">CausalityAnyState</span> <span class="k">where</span> <span class="kt">State</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Structs/Causality.html">Causality</a></span><span class="o">.</span><span class="kt"><a href="../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="kt">Hashable</span> <span class="k">where</span> <span class="kt">Value</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:9CausalityAAV12DynamicStateC"></a>
+                    <a name="//apple_ref/swift/Class/DynamicState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:9CausalityAAV12DynamicStateC">DynamicState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>DynamicState</code> can be used if you need to uniquely identify states by paramter.
+To properly declare your <code>DynamicState</code>, ensure you define your <code>CodingKeys</code> and override <code>encode()</code> to conform to Encodable.  All keys that you want to be included in the unique identification should be specified in <code>encode()</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">DynamicState</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality/State.html">State</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Causality</span><span class="o">.</span><span class="kt"><a href="../Structs/Causality/AnyState.html">AnyState</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Causality/State.html">State</a></span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="kt">Encodable</span> <span class="k">where</span> <span class="kt"><a href="../Structs/Causality/State.html">State</a></span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -534,7 +674,7 @@ Callers should make no assumptions about the underlying type of a <code>Subscrip
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-09-28)</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-05)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
