@@ -44,17 +44,21 @@ public extension Causality {
     ///
     /// Example:
     /// ```
-    /// static let SomeState = Causality.State<Int>(name: "Some State")
+    /// static let SomeState = Causality.State<Int>(label: "Some State")
     /// ```
     /// This declares `SomeState` as an state that will pass an `Int` to subscribers whenever the value changes.
     class State<Value: Causality.StateValue>: Causality.AnyState<Value> & Hashable {
         /// A name assigned to the state.  This is not a key parameter and does not need to be unique.
-        public let name: String
+        public let label: String
 
         private let id: StateId
 
-        init(name: String) {
-            self.name = name
+        /// Initialize a state
+        /// - Parameter label: provides some context on the purpose of the state.
+        /// 
+        /// Note: This does not uniquely identify the state.
+        init(label: String) {
+            self.label = label
             self.id = UUID()
             super.init()
 

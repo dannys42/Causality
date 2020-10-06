@@ -12,7 +12,7 @@ public extension Causality {
     /// The queue used by the default bus for thread-safety.  Also the default queue used for all buses (unless specified on initialization).
     static let globalQueue = DispatchQueue(label: "Causality.global", qos: .default, attributes: [], autoreleaseFrequency: .inherit, target: .global(qos: .default))
     /// A default/global bus
-    static let bus = Bus(name: "global", queue: globalQueue)
+    static let bus = Bus(label: "global", queue: globalQueue)
 
     /// Subscriptions can have the following statuses:
     enum SubscriptionStatus {
@@ -31,16 +31,16 @@ public extension Causality {
     /// A Bus for events to go from publishers to subscribers
     class Bus {
         /// A name for the bus.
-        public private(set) var name: String
+        public private(set) var label: String
 
         /// Queue on which to execute publish/subscribe actions to ensure thread safety
         public private(set) var queue: DispatchQueue
 
         /// Initialize a Causality Event Bus
-        /// - Parameter name: name to give the bus
+        /// - Parameter label: name to give the bus
         /// - Parameter queue: Queue for bookkeeping (e.g. to ensure publish/subscribe is thread safe)
-        public init(name: String, queue: DispatchQueue = globalQueue) {
-            self.name = name
+        public init(label: String, queue: DispatchQueue = globalQueue) {
+            self.label = label
             self.queue = queue
         }
 

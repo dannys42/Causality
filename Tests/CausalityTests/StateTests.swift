@@ -15,13 +15,13 @@ fileprivate struct StringState: Causality.StateValue {
 fileprivate struct NumberState: Causality.StateValue {
     let number: Int
 }
-fileprivate let InterestingString = Causality.State<StringState>(name: "Foo")
-fileprivate let FunNumber = Causality.State<NumberState>(name: "Foo")
+fileprivate let InterestingString = Causality.State<StringState>(label: "Foo")
+fileprivate let FunNumber = Causality.State<NumberState>(label: "Foo")
 
 final class StateTests: XCTestCase {
 
     func testThat_InitialState_DoesNotExist() {
-        let bus = Causality.Bus(name: "\(#function)")
+        let bus = Causality.Bus(label: "\(#function)")
 
         let hasState = bus.hasState(InterestingString)
         let state = bus.getState(InterestingString)
@@ -34,7 +34,7 @@ final class StateTests: XCTestCase {
         let inputValue = StringState(string: "Hello world!")
         let expectedValue = inputValue
         let resolvedValue: StringState?
-        let bus = Causality.Bus(name: "\(#function)")
+        let bus = Causality.Bus(label: "\(#function)")
 
         bus.set(state: InterestingString, value: inputValue)
 
@@ -46,7 +46,7 @@ final class StateTests: XCTestCase {
     }
 
     func testThat_StateHandlerNotCalled_BeforeFirstPublish() {
-        let bus = Causality.Bus(name: "\(#function)")
+        let bus = Causality.Bus(label: "\(#function)")
         var didCallHandler = false
         let g = DispatchGroup()
 
@@ -68,7 +68,7 @@ final class StateTests: XCTestCase {
         let expectedValue = inputValue
         var resolvedValue: StringState?
 
-        let bus = Causality.Bus(name: "\(#function)")
+        let bus = Causality.Bus(label: "\(#function)")
         let g = DispatchGroup()
 
         bus.set(state: InterestingString, value: inputValue)
@@ -91,7 +91,7 @@ final class StateTests: XCTestCase {
         let expectedValue = inputValue
         var resolvedValue: StringState?
 
-        let bus = Causality.Bus(name: "\(#function)")
+        let bus = Causality.Bus(label: "\(#function)")
         let g = DispatchGroup()
 
         g.enter()
@@ -114,7 +114,7 @@ final class StateTests: XCTestCase {
         var resolvedStateChangeCount = 0
         let stateValue = StringState(string: "Hello world!")
 
-        let bus = Causality.Bus(name: "\(#function)")
+        let bus = Causality.Bus(label: "\(#function)")
         let g = DispatchGroup()
 
         bus.set(state: InterestingString, value: stateValue)
@@ -140,7 +140,7 @@ final class StateTests: XCTestCase {
         let stateValue1 = StringState(string: "Hello world!")
         let stateValue2 = StringState(string: "Goodbye cruel world.")
 
-        let bus = Causality.Bus(name: "\(#function)")
+        let bus = Causality.Bus(label: "\(#function)")
 
         _ = bus.subscribe(InterestingString) { state in
             resolvedStateChangeCount += 1
@@ -159,8 +159,8 @@ final class StateTests: XCTestCase {
         let expectedString = inputString
         var resolvedString: String? = nil
 
-        let event = Causality.Bus(name: "\(#function)")
-        let plainStringState = Causality.State<String>(name: "plain String")
+        let event = Causality.Bus(label: "\(#function)")
+        let plainStringState = Causality.State<String>(label: "plain String")
 
         let expectation = XCTestExpectation()
 
@@ -183,7 +183,7 @@ final class StateTests: XCTestCase {
         let expectedStateValues = ["a"]
         var resolvedStateValues: [String] = []
 
-        let event = Causality.Bus(name: "\(#function)")
+        let event = Causality.Bus(label: "\(#function)")
         class MyState<Value: Causality.StateValue>: Causality.DynamicState<Value> {
             let stateId: Int
             var foo: String = "blah"
@@ -232,7 +232,7 @@ final class StateTests: XCTestCase {
         let expectedStateValues = ["a", "b"]
         var resolvedStateValues: [String] = []
 
-        let event = Causality.Bus(name: "\(#function)")
+        let event = Causality.Bus(label: "\(#function)")
         class MyState<Value: Causality.StateValue>: Causality.DynamicState<Value> {
             let stateId: Int
             var foo: String = "blah"

@@ -46,7 +46,7 @@ This declares an event called `aTriggerEvent` that has no associated data.
 
 ```swift
 struct MyEvents {
-    static let aTriggerEvent = Causality.Event<Causality.NoMessage>(name: "A Trigger")
+    static let aTriggerEvent = Causality.Event<Causality.NoMessage>(label: "A Trigger")
 }
 ```
 
@@ -91,18 +91,18 @@ Events may be declared with an associated `Message`.  If declared, the `Message`
 Declaring an event with a message:
 
 ```swift
-let MyInterestingEvent = Causality.Event<SomeMessage>(name: "Some Event")
-let MyStringEvent = Causality.Event<String>(name: "An event with a String message")
-let MyNumberEvent = Causality.Event<Int>(name: "An event with an Int message")
+let MyInterestingEvent = Causality.Event<SomeMessage>(label: "Some Event")
+let MyStringEvent = Causality.Event<String>(label: "An event with a String message")
+let MyNumberEvent = Causality.Event<Int>(label: "An event with an Int message")
 ```
 
 Or categorize your events:
 
 ```swift
 struct MyEvents {
-    static let MyInterestingEvent = Causality.Event<InterestingMessage>(name: "An interesting Event 1")
-    static let MyStringEvent = Causality.Event<String>(name: "An event with a String message")
-    static let MyNumberEvent = Causality.Event<Int>(name: "An event with an Int message")
+    static let MyInterestingEvent = Causality.Event<InterestingMessage>(label: "An interesting Event 1")
+    static let MyStringEvent = Causality.Event<String>(label: "An event with a String message")
+    static let MyNumberEvent = Causality.Event<Int>(label: "An event with an Int message")
 }
 ```
 
@@ -156,7 +156,7 @@ eventBus.publish(MyEvents.MyInterestingEvent,
 Or create local buses to isolate your events:
 
 ```swift
-let newEventBus = Causality.Bus(name: "My local bus")
+let newEventBus = Causality.Bus(label: "My local bus")
 
 newEventBus.publish(MyEvents.interestingEvent, 
     message: InterestingMessage(string: "Hello", number: 42))
@@ -184,15 +184,15 @@ struct PlayerInfo: Causality.StateValue {
 Declaring a state with the associated value:
 
 ```swift
-let playerState = Causality.State<PlayerInfo>(name: "Player State")
+let playerState = Causality.State<PlayerInfo>(label: "Player State")
 ```
 
 Or categorize your states:
 
 ```swift
 struct GameStates {
-    static let playerState1 = Causality.State<PlayerInfo>(name: "Player 1 State")
-    static let playerState2 = Causality.State<PlayerInfo>(name: "Player 2 State")
+    static let playerState1 = Causality.State<PlayerInfo>(label: "Player 1 State")
+    static let playerState2 = Causality.State<PlayerInfo>(label: "Player 2 State")
 }
 ```
 
@@ -290,7 +290,7 @@ Causality.bus.set(state: GameState.playerState(1),
 Similarly, you could use base types of `Int`, `String`, etc. for the `Value`.
 
 ```swift
-let UserNameState = Causality.State<String>(name: "user name state")
+let UserNameState = Causality.State<String>(label: "user name state")
 Causality.bus.subscribe(UserNameState) { username in
     print("Username is now: \(username)")
 }

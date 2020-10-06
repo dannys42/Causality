@@ -30,19 +30,21 @@ public extension Causality {
     ///
     /// Example:
     /// ```
-    /// static let SomeEvent = Causality.Event<Int>(name: "Some Event")
+    /// static let SomeEvent = Causality.Event<Int>(label: "Some Event")
     /// ```
     /// This declares `SomeEvent` as an event that will require an `Int` on publish and will pass the same `Int` to the subscription handler.
     class Event<Message: Causality.Message>: Causality.AnyEvent<Message> & Hashable {
 
-        var name: String
+        var label: String
 
         private let id: EventId
 
         /// Initialize an event
-        /// - Parameter name: provides some context on the purpose of the event.  This does not uniquely identify the event.
-        init(name: String) {
-            self.name = name
+        /// - Parameter label: provides some context on the purpose of the event.
+        ///
+        /// Note: This does not uniquely identify the event.
+        init(label: String) {
+            self.label = label
             self.id = UUID()
             super.init()
 
