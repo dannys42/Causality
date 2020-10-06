@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Causality'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = 'A simple thread-safe, in-memory bus for Swift that supports fully-typed Events and States.'
 
 # This description is used to generate tags and improve search results.
