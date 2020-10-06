@@ -5,8 +5,8 @@
 <img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2"></a>
 <br/>
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fdannys42%2FCausality%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/dannys42/Causality)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fdannys42%2FCausality%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/dannys42/Causality)
+<a href="https://swiftpackageindex.com/dannys42/Causality"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fdannys42%2FCausality%2Fbadge%3Ftype%3Dswift-versions"></a>
+<a href="https://swiftpackageindex.com/dannys42/Causality"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fdannys42%2FCausality%2Fbadge%3Ftype%3Dplatforms"></a>
 </p>
 
 # Causality
