@@ -8,7 +8,7 @@
 </p>
 
 # Causality
-`Causality` is simple in-memory event bus for Swift.  Events may have an associated message and are fully typed.  All publish/subscribe methods are thread-safe.
+`Causality` is a simple thread-safe, in-memory bus for Swift that supports fully-typed Events and States.
 
 In addition, `Causality` has provisions for monitoring `State` information.  `State` is similar to `Event`, but differ in that:
 
@@ -31,6 +31,14 @@ Add `Causality` to your target's dependencies:
 
 ```swift
 .target(name: "example", dependencies: ["Causality"]),
+```
+
+### Cocoapods
+
+Add `Causality` to your Podfile:
+
+```ruby
+pod `Causality`
 ```
 
 ## Usage
