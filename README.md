@@ -8,12 +8,15 @@
 </p>
 
 # Causality
-`Causality` is simple in-memory event bus for Swift.  Events may have associated data and are fully typed.  All publish/subscribe methods are thread-safe.
+`Causality` is simple in-memory event bus for Swift.  Events may have an associated message and are fully typed.  All publish/subscribe methods are thread-safe.
 
-In addition, `Causality` has provisions for monitoring State information.  State differs from Events in that:
+In addition, `Causality` has provisions for monitoring `State` information.  `State` is similar to `Event`, but differ in that:
 
- - State handlers will be called immediately with the last known good value (if one is available)
- - State handlers will not be called if the state value is identical to the previous value
+ - `State` handlers will be called immediately with the last known good value (if one is available)
+ - `State` handlers will not be called if the state value is identical to the previous value
+ - Whereas an `Event` has an associated `Message`, a `State` has an associated `Value`. 
+ - A state's `Value` must conform to the Equatable protocol.
+
 
 ## Installation
 
@@ -43,7 +46,7 @@ This declares an event called `aTriggerEvent` that has no associated data.
 
 ```swift
 struct MyEvents {
-    static let aTriggerEvent = Causality.Event<NoSimpleEventMessage>(name: "A Trigger")
+    static let aTriggerEvent = Causality.Event<Causality.NoMessage>(name: "A Trigger")
 }
 ```
 
@@ -53,7 +56,7 @@ To subscribe to this event:
 
 ```swift
 let subscription = Causality.bus.subscribe(MyEvents.aTriggerEvent) { _ in
-    print("Event happened")
+    print("Event was triggered")
 }
 
 ```
@@ -68,11 +71,11 @@ Causality.bus.publish(MyEvents.aTriggerEvent)
 
 ### An event with associated data
 
-Events can include data of any type (referred to as a "message").  The event label is fully type specified with the message.  So a subscriber will have a fully typed message available to its handler.
+Events can include data of any type (referred to as a `Message`).  The event label is fully type specified with the message.  So a subscriber will have a fully typed message available to its handler.
 
 #### Define the Message
 
-A message can be a standard Swift type like `Int`, `String`, etc.  Or it can be a `struct` or `class`.  In this example, we'll declare a struct:
+A message can be a standard Swift type like `Int`, `String`, etc.  Or it can be a `struct` or `class` that conform to `Causality.Message`.  Take care as to whether you want value or reference semantics for messages.  Generally, value semantics (i.e. a `struct`) will be safer.  In this example, we'll declare a struct:
 
 ```swift
 struct InterestingMessage: Causality.Message {
@@ -83,18 +86,23 @@ struct InterestingMessage: Causality.Message {
 
 #### Declare the event
 
+Events may be declared with an associated `Message`.  If declared, the `Message` is a required typed parameter for publishing an event.  And similarly it will be supplied as a typed parameter to subscribers of the event.
+
 Declaring an event with a message:
 
 ```swift
-let someEvent = Causality.Event<SomeMessage>(name: "Some Event")
+let MyInterestingEvent = Causality.Event<SomeMessage>(name: "Some Event")
+let MyStringEvent = Causality.Event<String>(name: "An event with a String message")
+let MyNumberEvent = Causality.Event<Int>(name: "An event with an Int message")
 ```
 
 Or categorize your events:
 
 ```swift
 struct MyEvents {
-    static let interestingEvent1 = Causality.Event<InterestingMessage>(name: "An interesting Event 1")
-    static let interestingEvent2 = Causality.Event<InterestingMessage>(name: "An interesting Event 2")
+    static let MyInterestingEvent = Causality.Event<InterestingMessage>(name: "An interesting Event 1")
+    static let MyStringEvent = Causality.Event<String>(name: "An event with a String message")
+    static let MyNumberEvent = Causality.Event<Int>(name: "An event with an Int message")
 }
 ```
 
@@ -103,18 +111,18 @@ struct MyEvents {
 Save your subscriptions to unsubscribe later:
 
 ```swift
-let subscription = Causality.bus.subscribe(MyEvents.interestingEvent) { message in
-    print("A message from interestingEvent: \(message)")
+let subscription = Causality.bus.subscribe(MyEvents.MyInterestingEvent) { interestingMessage in
+    print("A message from MyInterestingEvent: \(interestingMessage)")
 }
 
 Casaulity.bus.unsubscribe(subscription)
 ```
 
-Or unsubscribe from within a subscription handler:
+Or unsubscribe from within a subscription handler.  Here's an example of a one-shot event handler:
 
 ```swift
-Causality.bus.subscribe(MyEvents.interestingEvent) { subscription, message in
-    print("A message from interestingEvent: \(message)")
+Causality.bus.subscribe(MyEvents.MyStringEvent) { subscription, string in
+    print("A string from MyStringEvent: \(string)")
     
     subscription.unsubscribe()
 }
@@ -123,28 +131,34 @@ Causality.bus.subscribe(MyEvents.interestingEvent) { subscription, message in
 
 #### Publish events
 
-To publish/post an event of this type:
+To publish/post an event:
 
 ```swift
-Causality.bus.publish(MyEvents.interestingEvent1, 
+Causality.bus.publish(MyEvents.MyInterestingEvent, 
     message: InterestingMessage(string: "Hello", number: 42))
 ```
+
+#### Event Buses
+
+### Bus Alias
 
 Create aliases for your bus:
 
 ```swift
 let eventBus = Causality.bus
 
-eventBus.publish(MyEvents.interestingEvent1, 
+eventBus.publish(MyEvents.MyInterestingEvent, 
     message: InterestingMessage(string: "Hello", number: 42))
 ```
+
+### Local Buses
 
 Or create local buses to isolate your events:
 
 ```swift
 let newEventBus = Causality.Bus(name: "My local bus")
 
-newEventBus.publish(MyEvents.interestingEvent1, 
+newEventBus.publish(MyEvents.interestingEvent, 
     message: InterestingMessage(string: "Hello", number: 42))
 ```
 
@@ -154,7 +168,7 @@ newEventBus.publish(MyEvents.interestingEvent1,
 
 #### Define the State Value
 
-Similar to Events, States have defined values.  However `StateValue`s must be Equatable. 
+Similar to an `Event`, a `State` has an associated `Value`.  Values can be raw types such as `Int`, `String`, etc.  Or they may be `struct` or a `class`.  (Similar to a an event `Message`, you'll usually want to use a `struct`.)  However a `Value` must conform to `Equatable`. 
 
 
 ```swift
@@ -173,7 +187,7 @@ Declaring a state with the associated value:
 let playerState = Causality.State<PlayerInfo>(name: "Player State")
 ```
 
-Or categorize your events:
+Or categorize your states:
 
 ```swift
 struct GameStates {
@@ -194,7 +208,7 @@ let subscription = Causality.bus.subscribe(GameStates.playerState1) { state in
 Casaulity.bus.unsubscribe(subscription)
 ```
 
-Or unsubscribe from within a subscription handler:
+Or unsubscribe from within a subscription handler.  This example will monitor only a single state change:
 
 ```swift
 Causality.bus.subscribe(GameStates.playerState1) { subscription, message in
@@ -219,7 +233,7 @@ Causality.bus.set(GameStates.playerState1,
 
 In the game example above, we have one Causality.State variable for every state.  But what if we have "n" number of players?  In that case, we can use Dynamic States.  Dynamic States allows you to parameterize your State.  Dynamic States are Codable and require you to define `CodingKeys` and to overload the `encode()` function to specify "key" parameters.  These parameters are used to uniquely identify the state.  For example:
 
-```
+```swift
 class PlayerState<Value: PlayerInfo>: Causality.DynamicState<Value> {
     let playerId: Int
 
@@ -265,13 +279,25 @@ And to set/update a state:
 
 ```swift
 
-event.set(state: GameState.playerState(1), 
-    value: PlayerInfo(
-        numberOfLines: 3,
-        health: 75,
-        armor: 100))
+Causality.bus.set(state: GameState.playerState(1), 
+                  value: PlayerInfo(
+                            numberOfLines: 3,
+                            health: 75,
+                            armor: 100))
 
 ```
+
+Similarly, you could use base types of `Int`, `String`, etc. for the `Value`.
+
+```swift
+let UserNameState = Causality.State<String>(name: "user name state")
+Causality.bus.subscribe(UserNameState) { username in
+    print("Username is now: \(username)")
+}
+Causality.bus.set(UserNameState, "Mary Jane Doe")
+```
+
+
 
 ## Dynamic Events
 
