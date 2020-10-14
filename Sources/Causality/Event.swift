@@ -101,8 +101,9 @@ extension Causality.Bus {
     ///   - handler: A handler that is called for each event of this type that occurs (on the specified queue)
     @discardableResult
     public func subscribe<Event: Causality.AnyEvent<Message>, Message: Causality.Message>(_ event: Event, queue: DispatchQueue?=nil, handler: @escaping (Causality.EventSubscription<Event,Message>, Message)->Void) -> Causality.EventSubscription<Event,Message> {
-        
-        return self.subscribe(event, workQueue: .dispatch(queue), handler: handler)
+
+        let workQueue = WorkQueue(queue)
+        return self.subscribe(event, workQueue: workQueue, handler: handler)
     }
 
     /// Add a subscriber to a specific event type
