@@ -1,3 +1,4 @@
+#if !os(watchOS)
 import XCTest
 @testable import Causality
 
@@ -205,3 +206,4 @@ final class CausalityTests: XCTestCase {
         ( "testPerformanceOf_SingleEvent", testPerformanceOf_SingleEvent ),
     ]
 }
+#endif

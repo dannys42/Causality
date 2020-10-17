@@ -5,6 +5,7 @@
 //  Created by Danny Sung on 09/28/2020.
 //
 
+#if !os(watchOS)
 import Foundation
 import XCTest
 @testable import Causality
@@ -281,3 +282,4 @@ final class StateTests: XCTestCase {
     }
 
 }
+#endif
