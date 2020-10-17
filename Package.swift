@@ -24,6 +24,6 @@ let package = Package(
             dependencies: [ ]),
         .testTarget(
             name: "CausalityTests",
-            dependencies: ["Causality"]),
+            dependencies: ["Causality", "XCTest"]),
     ]
 )
