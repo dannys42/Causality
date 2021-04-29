@@ -43,7 +43,7 @@ public extension Causality {
         /// - Parameter label: provides some context on the purpose of the event.
         ///
         /// Note: This does not uniquely identify the event.
-        init(label: String) {
+        public init(label: String) {
             self.label = label
             self.id = UUID()
             super.init()
