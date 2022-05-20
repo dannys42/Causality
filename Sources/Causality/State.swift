@@ -74,7 +74,7 @@ public extension Causality {
     }
 
     /// `DynamicState` can be used if you need to uniquely identify states by paramter.
-    /// To properly declare your `DynamicState`, ensure you define your `CodingKeys` and override `encode()` to conform to Encodable.  All keys that you want to be included in the unique identification should be specified in `encode()`.
+    /// To properly declare your `DynamicState`, ensure you define your `CodingKeys` and override `encode()` to conform to Encodable.  Only keys that you want to be included in the unique identification should be specified in `encode()`.
     class DynamicState<State: Causality.StateValue>: Causality.AnyState<State> & Encodable {
     }
 
