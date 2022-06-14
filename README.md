@@ -371,6 +371,7 @@ For more information visit our [API reference](https://dannys42.github.io/Causal
  - [TopicEventBus](https://github.com/mcmatan/topicEventBus)
  - [SwiftEventBus](https://github.com/cesarferreira/SwiftEventBus)
  - [EmitterKit](https://github.com/aleclarson/emitter-kit)
+ - [FayeSwift](https://github.com/hamin/FayeSwift)
  
 ## License
 This library is licensed under Apache 2.0. The full license text is available in [LICENSE](LICENSE).
